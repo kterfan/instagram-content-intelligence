@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 import re
-import tomllib
 from pathlib import Path
 
 
@@ -29,9 +28,16 @@ def main() -> None:
         codex = _json(ROOT / ".codex-plugin" / "plugin.json")
         claude = _json(ROOT / ".claude-plugin" / "plugin.json")
         marketplace = _json(ROOT / ".claude-plugin" / "marketplace.json")
-        pyproject = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))
     except ValueError as exc:
         raise SystemExit(str(exc)) from exc
+
+    pyproject_text = (ROOT / "pyproject.toml").read_text(encoding="utf-8")
+    project_section = re.search(r"(?ms)^\[project\]\s*(.*?)(?=^\[|\Z)", pyproject_text)
+    python_version_match = re.search(
+        r'^version\s*=\s*"([^"]+)"',
+        project_section.group(1) if project_section else "",
+        re.MULTILINE,
+    )
 
     entries = marketplace.get("plugins", [])
     marketplace_version = entries[0].get("version") if entries else None
@@ -41,7 +47,7 @@ def main() -> None:
         "codex": codex.get("version"),
         "claude": claude.get("version"),
         "marketplace": marketplace_version,
-        "python": pyproject.get("project", {}).get("version"),
+        "python": python_version_match.group(1) if python_version_match else None,
         "package": package_match.group(1) if package_match else None,
     }
     if len(set(versions.values())) != 1 or None in versions.values():
