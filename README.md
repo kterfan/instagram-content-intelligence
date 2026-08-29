@@ -16,7 +16,13 @@ It is a Codex plugin **and** a deterministic Python toolkit. It is not a collect
 
 ## Install
 
-Python core:
+The plugin ships an installation-free runner. Installed Claude/Codex skills call:
+
+```bash
+python "${PLUGIN_ROOT}/scripts/ici.py" doctor
+```
+
+This works without `pip install` and from any current working directory. Optional Python package installation is still available for the global `ici` command:
 
 ```bash
 python -m pip install -e .
@@ -43,12 +49,24 @@ ici reel manifest --media my-reel.mp4 --permission-basis owned
 ici visual --headline "یک تیتر دقیق" --body "متن فارسی بدون حدس در تصویر" --html frame.html --png frame.png
 ```
 
+For an installed plugin, replace `ici` with `python "${PLUGIN_ROOT}/scripts/ici.py"`. Run `doctor` first. Core analytics needs only Python 3.10+. Reel media stages and PNG/image stages declare missing dependencies and degrade without fabricating output.
+
 Run quality gates:
 
 ```bash
 python -m unittest discover -s tests -v
 python benchmarks/run_benchmarks.py
 ```
+
+## Plugin packaging
+
+- Codex: `.codex-plugin/plugin.json`
+- Claude Code/Cowork-compatible package: `.claude-plugin/plugin.json`
+- Claude marketplace: `.claude-plugin/marketplace.json`
+- Shared skills: `skills/*/SKILL.md`
+- Installation-free runtime: `scripts/ici.py`
+
+All four version-bearing files are checked for exact version parity in CI.
 
 ## Skills
 

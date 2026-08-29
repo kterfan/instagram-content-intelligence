@@ -7,6 +7,10 @@ description: Generate Instagram visual assets internally through a provider adap
 
 Use image models for art direction and deterministic rendering for exact text.
 
+## Runtime and graceful degradation
+
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"`; no package installation is required. Run `doctor` first. If an image provider is unavailable, produce the exact RTL HTML layout with a declared missing background. If Playwright/Chromium is unavailable, return HTML instead of PNG and report the missing rendering capability. Never claim an image or PNG was generated when its stage did not run.
+
 ## Workflow
 
 1. Load account visual tokens, surface, dimensions, safe zones, and accessibility constraints.
@@ -20,11 +24,10 @@ Use image models for art direction and deterministic rendering for exact text.
 
 Create and optionally rasterize exact-text layouts with:
 
-`ici visual --headline ... --body ... --html frame.html --png frame.png`
+`python "${PLUGIN_ROOT}/scripts/ici.py" visual --headline ... --body ... --html frame.html --png frame.png`
 
 For full provider generation, call `generate_story_visual` from `instagram_content_intelligence.visual`.
 
 ## Output
 
 Return the generation prompt, provider/model/version, seed if supported, background asset, exact copy, layout file, final PNG, and QA report.
-

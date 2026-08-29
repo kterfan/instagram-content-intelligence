@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from .insights import analyze_account_distribution, analyze_reel, analyze_story_sequence
+from .doctor import environment_report
 from .matrix import ContentCandidate, MatrixConfig, select_portfolio
 from .reel_reverse import analyze_measured_features, build_analysis_manifest, inspect_toolchain, probe_media, run_local_pipeline
 from .story import design_story_sequence
@@ -97,9 +98,17 @@ def cmd_visual(args: argparse.Namespace) -> None:
     _write(result, args.output)
 
 
+def cmd_doctor(args: argparse.Namespace) -> None:
+    _write(environment_report(), args.output)
+
+
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="ici")
     sub = parser.add_subparsers(required=True)
+
+    doctor = sub.add_parser("doctor")
+    doctor.add_argument("--output")
+    doctor.set_defaults(func=cmd_doctor)
 
     trends = sub.add_parser("trends")
     trends.add_argument("input")

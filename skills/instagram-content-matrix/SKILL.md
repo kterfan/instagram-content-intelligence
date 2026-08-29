@@ -7,6 +7,10 @@ description: Design a configurable, evidence-aware Instagram Content Matrix and 
 
 Build a multidimensional decision system, not a decorative two-axis grid and not a Cartesian explosion.
 
+## Runtime
+
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. The installation-free command is `python "${PLUGIN_ROOT}/scripts/ici.py"`. Run `doctor` first when execution capability is uncertain. If Python execution is unavailable, apply the documented scoring and constraints in-model, label the result `degraded-model-analysis`, and do not claim that deterministic selection ran.
+
 ## Required dimensions
 
 Start with audience, job/pain/gain, intent stage, pillar, objective, Instagram surface, format, angle, evidence type, narrative mechanism, CTA, lifecycle, effort, and risk. Add or remove dimensions only with an account-specific reason.
@@ -20,12 +24,11 @@ Start with audience, job/pain/gain, intent stage, pillar, objective, Instagram s
 5. Add portfolio constraints: maximum concentration and minimum coverage by objective, intent stage, pillar, surface, or format.
 6. Run the deterministic selector:
 
-   `ici matrix <input.json> --output <portfolio.json>`
+   `python "${PLUGIN_ROOT}/scripts/ici.py" matrix <input.json> --output <portfolio.json>`
 
 7. Review `unmet_coverage` and `selection_audit`. Do not hide an infeasible portfolio.
 8. Calibrate weights from account experiments; never claim one universal matrix is optimal for all niches.
 
 ## Output
 
-Return the selected portfolio, rejected near-misses, coverage audit, score definitions, assumptions, and a measurement plan. Use `docs/content-matrix.md` for the evidence/design boundary.
-
+Return the selected portfolio, rejected near-misses, coverage audit, score definitions, assumptions, and a measurement plan. Use `${PLUGIN_ROOT}/docs/content-matrix.md` for the evidence/design boundary.

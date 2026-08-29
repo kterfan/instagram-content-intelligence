@@ -1,0 +1,10 @@
+{
+  "name": "instagram-content-intelligence",
+  "description": "Evidence-backed Instagram strategy, trend intelligence, Insights analytics, Reel reverse engineering, Story design, and visual generation.",
+  "version": "0.1.1",
+  "author": {
+    "name": "Erfan (kterfan)"
+  },
+  "homepage": "https://github.com/kterfan/instagram-content-intelligence",
+  "license": "MIT"
+}

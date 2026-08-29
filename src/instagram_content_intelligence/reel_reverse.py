@@ -3,33 +3,14 @@ from __future__ import annotations
 import json
 import shutil
 import subprocess
-from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any
 
-
-@dataclass(frozen=True)
-class ToolStatus:
-    name: str
-    available: bool
-    path: str | None
-    purpose: str
+from .doctor import environment_report
 
 
-TOOLS = {
-    "ffprobe": "container, stream, duration, frame-rate, and codec metadata",
-    "ffmpeg": "audio and frame extraction",
-    "whisper": "multilingual speech transcription with timestamps",
-    "scenedetect": "shot-boundary detection",
-    "tesseract": "on-screen text OCR; install the Persian fas language pack when needed",
-}
-
-
-def inspect_toolchain() -> list[dict[str, Any]]:
-    return [
-        asdict(ToolStatus(name, bool(path := shutil.which(name)), path, purpose))
-        for name, purpose in TOOLS.items()
-    ]
+def inspect_toolchain() -> dict[str, Any]:
+    return environment_report()
 
 
 def _run(command: list[str], timeout: int = 300) -> subprocess.CompletedProcess[str]:

@@ -7,6 +7,10 @@ description: Design and evaluate reproducible Instagram content experiments and 
 
 Turn recommendations into falsifiable, versioned tests.
 
+## Runtime
+
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Repository quality commands must run from `${PLUGIN_ROOT}`, not the user's current directory. If the installed distribution omits tests, validate the produced artifact and report that repository benchmarks were unavailable.
+
 ## Workflow
 
 1. Write one hypothesis, target population, unit, intervention, control, primary metric, counter-metrics, and stopping rule.
@@ -15,8 +19,8 @@ Turn recommendations into falsifiable, versioned tests.
 4. Store input fixture, account/profile version, content version, publish context, metric provenance, and analysis code revision.
 5. Run repository tests and benchmarks before claiming a workflow improvement:
 
-   - `python -m unittest discover -s tests -v`
-   - `python benchmarks/run_benchmarks.py`
+   - `python -m unittest discover -s "${PLUGIN_ROOT}/tests" -v`
+   - `python "${PLUGIN_ROOT}/benchmarks/run_benchmarks.py"`
 
 6. Report uncertainty and practical effect, not only winner/loser language.
 
@@ -28,4 +32,3 @@ Turn recommendations into falsifiable, versioned tests.
 - Story anomaly detection on synthetic sequences.
 - Persian/RTL layout overflow and visual goldens when browser dependencies exist.
 - Reel feature extraction from annotated, redistributable fixtures.
-
