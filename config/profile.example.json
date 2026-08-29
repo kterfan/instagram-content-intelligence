@@ -1,0 +1,29 @@
+{
+  "account": {
+    "name": "example-account",
+    "language": "fa",
+    "region": "IR",
+    "categories": ["education"],
+    "risk_tolerance": 0.35
+  },
+  "trend": {
+    "horizon_hours": 168,
+    "min_sources": 2,
+    "enabled_sources": ["instagram_hashtag_api", "google_trends_export", "rss_atom"],
+    "weights": {
+      "velocity": 0.22,
+      "acceleration": 0.14,
+      "recency": 0.14,
+      "convergence": 0.16,
+      "relevance": 0.18,
+      "evidence": 0.16
+    }
+  },
+  "matrix": {
+    "portfolio_size": 12,
+    "diversity_lambda": 0.72,
+    "max_per_dimension_value": {"pillar": 4, "format": 5},
+    "min_coverage": {"objective": 3, "intent_stage": 3, "pillar": 3}
+  }
+}
+

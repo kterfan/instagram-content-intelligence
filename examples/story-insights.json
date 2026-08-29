@@ -1,0 +1,10 @@
+{
+  "frames": [
+    {"frame": 1, "reach": 10000, "navigation": {"TAP_FORWARD": 850, "TAP_EXIT": 120}},
+    {"frame": 2, "reach": 9400, "navigation": {"TAP_FORWARD": 920, "TAP_BACK": 110, "TAP_EXIT": 140}},
+    {"frame": 3, "reach": 8850, "replies": 95, "navigation": {"TAP_FORWARD": 780, "TAP_EXIT": 150}},
+    {"frame": 4, "reach": 5100, "navigation": {"TAP_FORWARD": 1200, "TAP_EXIT": 630}},
+    {"frame": 5, "reach": 4800, "shares": 130, "navigation": {"TAP_FORWARD": 500, "TAP_EXIT": 100}}
+  ]
+}
+

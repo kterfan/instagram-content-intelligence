@@ -1,0 +1,31 @@
+{
+  "config": {
+    "portfolio_size": 3,
+    "max_per_dimension_value": {"pillar": 1},
+    "min_coverage": {"pillar": 3, "objective": 3}
+  },
+  "candidates": [
+    {
+      "id": "reach-education",
+      "title": "Evidence-backed explainer",
+      "dimensions": {"audience": "segment-a", "job": "learn", "intent_stage": "see", "pillar": "education", "objective": "reach", "surface": "reel", "format": "explainer", "angle": "myth", "evidence": "primary", "narrative": "gap-proof-payoff", "cta": "save", "lifecycle": "evergreen"},
+      "scores": {"strategic_fit": 0.9, "audience_relevance": 0.9, "platform_fit": 0.8, "evidence_strength": 0.95, "novelty": 0.7, "trend_opportunity": 0.6, "historical_prior": 0.7, "feasibility": 0.8, "conversion_clarity": 0.7},
+      "embedding": [1, 0]
+    },
+    {
+      "id": "engage-trust",
+      "title": "Proof-led Story sequence",
+      "dimensions": {"audience": "segment-a", "job": "trust", "intent_stage": "think", "pillar": "trust", "objective": "engage", "surface": "story", "format": "sequence", "angle": "case", "evidence": "case-study", "narrative": "problem-proof", "cta": "reply", "lifecycle": "evergreen"},
+      "scores": {"strategic_fit": 0.85, "audience_relevance": 0.9, "platform_fit": 0.9, "evidence_strength": 0.8, "novelty": 0.7, "trend_opportunity": 0.4, "historical_prior": 0.7, "feasibility": 0.85, "conversion_clarity": 0.75},
+      "embedding": [0, 1]
+    },
+    {
+      "id": "convert-offer",
+      "title": "Decision guide",
+      "dimensions": {"audience": "segment-b", "job": "decide", "intent_stage": "do", "pillar": "offer", "objective": "convert", "surface": "carousel", "format": "guide", "angle": "comparison", "evidence": "demonstration", "narrative": "criteria-decision", "cta": "profile", "lifecycle": "campaign"},
+      "scores": {"strategic_fit": 0.9, "audience_relevance": 0.8, "platform_fit": 0.8, "evidence_strength": 0.75, "novelty": 0.65, "trend_opportunity": 0.3, "historical_prior": 0.6, "feasibility": 0.8, "conversion_clarity": 0.95},
+      "embedding": [-1, 0]
+    }
+  ]
+}
+

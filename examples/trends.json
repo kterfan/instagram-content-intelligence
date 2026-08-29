@@ -1,0 +1,19 @@
+{
+  "profile": {
+    "language": "fa",
+    "region": "IR",
+    "categories": ["education"],
+    "horizon_hours": 168,
+    "min_sources": 2,
+    "risk_tolerance": 0.35
+  },
+  "sources": [
+    {"id": "search", "source_type": "search_interest", "evidence_quality": 0.75},
+    {"id": "platform", "source_type": "platform_native", "evidence_quality": 0.8}
+  ],
+  "observations": [
+    {"topic": "نمونه ترند", "source_id": "search", "observed_at": "2026-08-29T10:00:00+00:00", "value": 70, "baseline": 35, "categories": ["education"], "evidence_url": "https://trends.google.com/trends/"},
+    {"topic": "نمونه ترند", "source_id": "platform", "observed_at": "2026-08-29T10:00:00+00:00", "value": 120, "baseline": 60, "categories": ["education"]}
+  ]
+}
+

@@ -1,0 +1,32 @@
+---
+name: instagram-insights-analyst
+description: Analyze Instagram account, Reel, post, and Story Insights with explicit API/dashboard/manual provenance. Use for retention, reach, share/reach, save/reach, profile conversion, follower distribution, or performance diagnosis.
+---
+
+# Instagram Insights Analyst
+
+Analyze what the supplied data supports; do not invent missing Instagram metrics.
+
+## Provenance boundary
+
+Label every field as Meta API, Instagram Dashboard, manual import, derived, or model inference. Preserve API version, collection time, scope, estimated status, and availability errors.
+
+Current platform caveats are documented in `docs/metrics-catalog.md`. In particular, account-level follower/non-follower breakdown is not automatically a per-Reel breakdown, and current media API documentation does not list Reel-level profile activity or follows even though some Dashboard surfaces expose additional metrics.
+
+## Workflow
+
+1. Validate scope, date range, media type, collection delay, and missing-value semantics.
+2. Run:
+
+   - `ici insights reel <metrics.json> --duration <seconds>`
+   - `ici insights story <frames.json>`
+   - `ici insights account <metrics.json>`
+
+3. Compare like with like: same surface, duration band, objective, audience state, and publish window where possible.
+4. Use robust account baselines, not generic industry numbers, unless a benchmark has transparent sampling.
+5. Distinguish observation, diagnosis, and experiment. Correlation does not prove why a Reel or frame lost viewers.
+
+## Output
+
+Return metric definitions, provenance gaps, ratios with denominators, cohort/baseline choice, anomalies, competing explanations, and the smallest discriminating experiment.
+

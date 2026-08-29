@@ -1,193 +1,87 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="Social Media Skills by Charlie Hills" width="100%"/>
-</p>
+# Instagram Content Intelligence
 
-# Social Media Skills for AI Agents
+An evidence-backed, general-purpose Instagram system for strategy, trend research, Insights analytics, Story retention, Reel reverse engineering, visual generation, and reproducible experimentation.
 
-The complete set of Claude skills behind Charlie Hills' content system. 415k+ followers across LinkedIn, Instagram, Substack, X and YouTube. 100m+ views per year. All running through one system that starts with the newsletter and flows out to every other channel.
+It is a Codex plugin **and** a deterministic Python toolkit. It is not a collection of prompts. LinkedIn and YouTube are intentionally out of scope.
 
-Built by [Charlie Hills](https://charliehills.substack.com). Subscribe to the [MarTech AI newsletter](https://charliehills.substack.com) for weekly breakdowns of how this system works in practice.
+## What makes it different
 
-**Contributions welcome.** Found a way to improve a skill? [Open a PR](https://github.com/charlie947/social-media-skills/pulls). Run into a problem? [Open an issue](https://github.com/charlie947/social-media-skills/issues).
+- A configurable Content Matrix that covers audience, job, intent, pillar, objective, surface, format, angle, evidence, narrative, CTA, lifecycle, effort, and risk—then selects a diverse constrained portfolio instead of generating a useless Cartesian grid.
+- General trend intelligence for any account, language, country, or category. It scores velocity, acceleration, recency, source convergence, relevance, evidence quality, saturation, and risk while retaining source limitations.
+- Explicit Instagram data provenance. Meta API, Professional Dashboard, manual import, derived metric, and model inference are never silently mixed.
+- Story sequence design and frame-level drop-off diagnostics.
+- Local Reel reverse engineering with ffprobe/FFmpeg, Whisper, PySceneDetect, and Persian-capable Tesseract. Measured features are separated from interpretation.
+- Internal image generation through provider adapters plus deterministic Persian/RTL typography and Playwright overflow QA.
+- Reproducible unit tests, schemas, synthetic fixtures, and benchmarks.
 
-## What are Skills?
+## Install
 
-Skills are markdown files that give AI agents specialised knowledge and workflows for specific tasks. When you install these in your project, Claude recognises when you're working on a social media task and applies the right patterns, voice rules, and platform constraints.
+Python core:
 
-## How Skills Work Together
-
-Every skill reads shared context. The `voice-builder` skill is the foundation. Every other skill checks it first (via `about-me.md` and `voice.md`) before drafting a line.
-
-```
-                    ┌──────────────────────────────────────┐
-                    │           voice-builder              │
-                    │   about-me.md + voice.md             │
-                    │   (read by every skill below)        │
-                    └──────────────────┬───────────────────┘
-                                       │
-                    ┌──────────────────▼───────────────────┐
-                    │         newsletter-voice             │
-                    │   newsletter-voice.md                │
-                    │   (the source every piece comes from)│
-                    └──────────────────┬───────────────────┘
-                                       │
-     ┌────────────┬────────────┬───────┴───────┬────────────┬────────────┐
-     ▼            ▼            ▼               ▼            ▼            ▼
-┌──────────┐ ┌──────────┐ ┌──────────┐ ┌──────────────┐ ┌──────────┐ ┌──────────┐
-│ Profile  │ │LinkedIn  │ │ Video    │ │ Analytics &  │ │Community │ │Standalone│
-│          │ │ posts    │ │          │ │ Scoring      │ │          │ │          │
-├──────────┤ ├──────────┤ ├──────────┤ ├──────────────┤ ├──────────┤ ├──────────┤
-│profile-  │ │post-     │ │reels-    │ │post-scorer   │ │pinned-   │ │hook-gen  │
-│ optimizer│ │ writer   │ │ scripting│ │              │ │ comment  │ │content-  │
-│          │ │graphic-  │ │youtube-  │ │analytics-    │ │          │ │ matrix   │
-│          │ │ designer │ │ thumbnail│ │ dashboard    │ │          │ │niche-    │
-│          │ │          │ │          │ │              │ │          │ │ research │
-│          │ │post-form │ │          │ │              │ │          │ │gemini-*  │
-│          │ │          │ │          │ │              │ │          │ │quote-post│
-└──────────┘ └──────────┘ └──────────┘ └──────────────┘ └──────────┘ └──────────┘
+```bash
+python -m pip install -e .
 ```
 
-See each skill's `SKILL.md` for trigger phrases, inputs, and dependencies.
+Optional media and visual toolchains:
 
-## Available Skills
+```bash
+python -m pip install -e ".[reels,visual,dev]"
+playwright install chromium
+```
 
-<!-- SKILLS:START -->
-| Skill | Description |
+System packages for the full Reel pipeline: `ffmpeg`/`ffprobe`, Tesseract with `fas` language data, and the dependencies documented by Whisper and PySceneDetect.
+
+## Quick start
+
+```bash
+ici trends examples/trends.json
+ici matrix examples/matrix.json
+ici insights reel examples/reel-insights.json --duration 31
+ici insights story examples/story-insights.json
+ici reel toolchain
+ici reel manifest --media my-reel.mp4 --permission-basis owned
+ici visual --headline "یک تیتر دقیق" --body "متن فارسی بدون حدس در تصویر" --html frame.html --png frame.png
+```
+
+Run quality gates:
+
+```bash
+python -m unittest discover -s tests -v
+python benchmarks/run_benchmarks.py
+```
+
+## Skills
+
+| Skill | Responsibility |
 |---|---|
-| [voice-builder](skills/voice-builder/) | Build `about-me.md` and `voice.md` from an interview plus 3 to 5 writing samples. The foundation every other skill reads. |
-| [newsletter-voice](skills/newsletter-voice/) | Add newsletter-specific writing instructions on top of voice-builder. Produces `newsletter-voice.md`. |
-| [profile-optimizer](skills/profile-optimizer/) | Rebuild a LinkedIn profile for conversions. Headline, about, experience, featured section, plus 4 image generation prompts. |
-| [post-writer](skills/post-writer/) | Draft LinkedIn posts in your voice using the voice files. |
-| [graphic-designer](skills/graphic-designer/) | Pick between HTML/CSS graphic and AI-generated infographic based on the post content. |
-| [post-scorer](skills/post-scorer/) | Pull your post history via Apify and score any draft against what actually performs for you. |
-| [reels-scripting](skills/reels-scripting/) | Reverse-engineer an outlier Reel via Apify + Gemini 2.5 Flash. Write a new script in your voice from your newsletter. |
-| [youtube-thumbnail](skills/youtube-thumbnail/) | Turn a video title into a branded YouTube thumbnail prompt for Gemini. |
-| [pinned-comment](skills/pinned-comment/) | Meme-style pinned comments with a matching image generation prompt. |
-| [hook-generator](skills/hook-generator/) | 6 clickbait-style two-line hook variations per topic. |
-| [post-formatter](skills/post-formatter/) | Topic to ready-to-publish post using PAS, AIDA, BAB, STAR, or SLAY. |
-| [content-matrix](skills/content-matrix/) | Pair your pillars with 8 formats for 32+ post ideas in one table. Justin Welsh style. |
-| [niche-research](skills/niche-research/) | Drive Claude for Chrome to scroll Reddit, X, and Google with verified dates. Surfaces the 20 most relevant stories in your niche from the last 7 days. |
-| [gemini-infographic](skills/gemini-infographic/) | The whiteboard style that pulled 480k impressions from 3 posts. |
-| [gemini-carousel](skills/gemini-carousel/) | Slide-by-slide carousel generator with an approval gate. |
-| [quote-post](skills/quote-post/) | Claude writes the quote, Gemini recreates the image with the quote baked in. |
-| [analytics-dashboard](skills/analytics-dashboard/) | LinkedIn Analytics export to interactive React dashboard plus 5 data-backed recommendations. |
-<!-- SKILLS:END -->
+| `instagram-account-foundation` | General account context, evidence, brand, constraints, and measurement |
+| `instagram-content-matrix` | Multidimensional portfolio design, scoring, coverage, and diversity |
+| `instagram-trend-intelligence` | Multi-source, source-aware trend research for any account |
+| `instagram-insights-analyst` | Reel, Story, post, and account Insights with scope/provenance rules |
+| `instagram-story-sequence` | Story narrative continuity and frame-loss control |
+| `instagram-reel-reverse-engineering` | Measured transcript/shot/OCR/audio teardown without copying |
+| `instagram-reel-script` | Original timecoded Reel production briefs |
+| `instagram-visual-generator` | Provider image generation plus deterministic RTL rendering |
+| `instagram-experiment-lab` | Experiments, tests, and benchmarks |
 
-## Installation
+## Data boundaries
 
-### Option 1: Claude Code plugin marketplace
+The project does not scrape or download third-party Reels. Reverse engineering accepts owned, licensed, user-provided, or otherwise authorized local files. Private account exports and tokens must not be committed. Use synthetic or redistributable fixtures in public tests.
 
-```bash
-# Add the marketplace
-/plugin marketplace add charlie947/social-media-skills
+Current Meta documentation contains important scope differences: account follower/non-follower breakdown is not automatically a per-media metric; some Dashboard Reel fields are not listed on the current media-insights endpoint; Story availability is time-sensitive; and several values are estimated or in development. See [the metrics catalog](docs/metrics-catalog.md).
 
-# Install the plugin
-/plugin install social-media-skills
-```
+## Research and design boundaries
 
-### Option 2: Clone and copy
+Platform facts and formulas are sourced in [research sources](docs/research-sources.md). Product weights and thresholds are declared design choices and must be calibrated per account. `radio_erfun` can be used as a private first validation account, but no domain-specific logic or private raw data belongs in this repository.
 
-```bash
-git clone https://github.com/charlie947/social-media-skills.git
-cp -r social-media-skills/skills/* ~/.claude/skills/
-```
+## Upstream attribution
 
-### Option 3: Individual skill upload (Claude Desktop)
+This repository started from the Git history of Charlie Hills' MIT-licensed [`social-media-skills`](https://github.com/charlie947/social-media-skills). The implementation, scope, architecture, skills, analytics, and tests have been rewritten for Instagram Content Intelligence. See [NOTICE](NOTICE).
 
-Download any skill folder, zip it, and upload via Customise skills in Claude.
+## فارسی
 
-```bash
-cd social-media-skills/skills
-zip -r voice-builder.skill voice-builder
-# Upload voice-builder.skill through Customise skills in the Claude app
-```
-
-### Option 4: Git submodule
-
-```bash
-git submodule add https://github.com/charlie947/social-media-skills.git .agents/social-media-skills
-```
-
-Then reference skills from `.agents/social-media-skills/skills/`.
-
-### Option 5: Fork and customise
-
-Fork the repo, swap the voice rules for your own, and clone your fork into your projects.
-
-## Usage
-
-Run `voice-builder` first. Every other skill needs `about-me.md` and `voice.md` to work properly.
-
-Once installed, ask Claude to help with content tasks and it will pick the right skill:
-
-```
-"Build my voice" → voice-builder
-"Write me a post about AI agents" → post-writer
-"Score this draft against my history" → post-scorer
-"Make me a carousel from this" → gemini-carousel
-"What should I post this week" → niche-research or content-matrix
-"Turn this outlier Reel into a script" → reels-scripting
-"I need a thumbnail for 'How I fired my team'" → youtube-thumbnail
-"Write me a pinned comment" → pinned-comment
-```
-
-## Skill Categories
-
-### Voice foundation
-- `voice-builder` — interview + sample analysis, writes about-me.md and voice.md
-- `newsletter-voice` — newsletter-specific writing rules on top of voice-builder
-
-### LinkedIn
-- `profile-optimizer` — full profile rebuild
-- `post-writer` — drafts in your voice
-- `graphic-designer` — HTML/CSS graphic or AI infographic, auto-selected
-- `post-formatter` — topic to post via named framework (PAS, AIDA, BAB, STAR, SLAY)
-- `hook-generator` — 6 hook variations per topic
-- `post-scorer` — scores drafts against your post history
-- `content-matrix` — pillars x formats ideation
-- `niche-research` — 7-day niche research via Claude for Chrome
-- `gemini-infographic` — whiteboard style for Gemini
-- `gemini-carousel` — slide-by-slide carousel
-- `quote-post` — two-step quote workflow
-
-### Instagram Reels
-- `reels-scripting` — Apify + Gemini 2.5 Flash reference analysis, newsletter-aligned script
-
-### YouTube
-- `youtube-thumbnail` — title to Gemini thumbnail prompt
-
-### Community
-- `pinned-comment` — meme-style pin + image prompt
-
-### Analytics
-- `analytics-dashboard` — LinkedIn export to dashboard + 5 recommendations
-
-## Prerequisites
-
-A few skills need external services. Set these environment variables before use:
-
-| Variable | Needed for |
-|---|---|
-| `APIFY_API_TOKEN` | post-scorer, reels-scripting |
-| `GOOGLE_AI_API_KEY` | reels-scripting (Gemini 2.5 Flash video analysis) |
-
-Set them with:
-
-```bash
-export APIFY_API_TOKEN=your_token
-export GOOGLE_AI_API_KEY=your_key
-```
-
-The image generation skills (`gemini-infographic`, `gemini-carousel`, `quote-post`, `youtube-thumbnail`, `profile-optimizer`) output ready-to-paste prompts. You run them in a separate Gemini chat with Create Image enabled. No API key needed.
-
-## Contributing
-
-PRs and issues welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on adding or improving skills.
-
-Run `./validate-skills.sh` before submitting to check your skill against the spec.
+این پروژه برای یک حوزه خاص ساخته نشده است. زبان، کشور، دسته بندی، سطح ریسک، منابع ترند، وزن ها و محدودیت های Content Matrix همگی قابل تنظیم اند. داده `radio_erfun` فقط می تواند fixture خصوصی اعتبارسنجی باشد و هیچ داده خام خصوصی وارد ریپوی عمومی نمی شود.
 
 ## License
 
-[MIT](LICENSE). Use these however you like. If they help you, a link back to the [newsletter](https://charliehills.substack.com) is appreciated.
-
-— Charlie
+MIT. See [LICENSE](LICENSE).

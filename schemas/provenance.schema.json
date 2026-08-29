@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/provenance.schema.json",
+  "title": "Metric provenance",
+  "type": "object",
+  "required": ["kind", "source", "collected_at"],
+  "properties": {
+    "kind": {"enum": ["meta_api", "instagram_dashboard", "manual_import", "public_source", "derived", "model_inference"]},
+    "source": {"type": "string", "minLength": 1},
+    "collected_at": {"type": "string", "format": "date-time"},
+    "api_version": {"type": ["string", "null"]},
+    "scope": {"type": ["string", "null"]},
+    "estimated": {"type": "boolean"},
+    "in_development": {"type": "boolean"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
+

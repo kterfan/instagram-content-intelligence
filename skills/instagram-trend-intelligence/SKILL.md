@@ -1,0 +1,35 @@
+---
+name: instagram-trend-intelligence
+description: Research and score Instagram-relevant trends for any account using configurable language, geography, category, risk, and source adapters. Use for trend research, emerging topics, trend validation, saturation analysis, or deciding whether an account should join a trend.
+---
+
+# Instagram Trend Intelligence
+
+Trend research must be source-aware, reproducible, and usable across all account types.
+
+## Non-negotiable rules
+
+- Never equate a Google Trends 0-100 value with search volume.
+- Never call a single viral post a trend.
+- Never compare raw counts across heterogeneous sources.
+- Never use a source merely because it exists; it must match the account's language, region, category, horizon, and risk profile.
+- Retain query, collection time, URL, source limitations, and transformations.
+
+## Workflow
+
+1. Load the account profile and `config/source-registry.json`.
+2. Build a query set from audience vocabulary, adjacent problems, category entities, cultural moments, competitors, and exclusions.
+3. Select applicable sources. Core choices include authorized Instagram hashtag results, official Google Trends exports, curated RSS/Atom feeds, and manual observations. Enable scholarly or community adapters only when relevant and authorized.
+4. Collect at least one historical comparison window. Mark missing baselines as insufficient evidence.
+5. Convert each source to the normalized observation contract. For official CSV and snapshot helpers use `instagram_content_intelligence.adapters`.
+6. Score velocity, acceleration, recency, source convergence, relevance, and evidence quality; penalize saturation and risk:
+
+   `ici trends <input.json> --output <ranked.json>`
+
+7. Report score and confidence separately. A high score with low confidence is a test candidate, not a recommendation.
+8. Translate accepted trends into original account-relevant angles; do not copy a creator's wording, edit, or identity.
+
+## Output
+
+For every candidate provide: topic, why-now evidence, source count, confidence, audience relevance, saturation, risk, expiration hypothesis, original angles, and validation experiment. See `docs/trend-intelligence.md`.
+

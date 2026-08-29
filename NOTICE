@@ -1,0 +1,12 @@
+Instagram Content Intelligence
+Copyright (c) 2026 Erfan (kterfan)
+
+This project was developed from the Git history and MIT-licensed ideas of:
+
+  social-media-skills
+  Copyright (c) 2025 Charlie Hills
+  https://github.com/charlie947/social-media-skills
+
+The upstream license is retained in LICENSE. The current project has a different
+Instagram-only scope and a substantially rewritten implementation.
+

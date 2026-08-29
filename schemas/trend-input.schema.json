@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trend intelligence input",
+  "type": "object",
+  "required": ["profile", "sources", "observations"],
+  "properties": {
+    "profile": {"type": "object", "required": ["language", "region", "categories"]},
+    "sources": {"type": "array", "items": {"type": "object", "required": ["id", "source_type", "evidence_quality"]}},
+    "observations": {"type": "array", "items": {"type": "object", "required": ["topic", "source_id", "observed_at", "value", "baseline"]}}
+  }
+}
+

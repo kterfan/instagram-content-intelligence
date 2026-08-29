@@ -1,0 +1,16 @@
+{
+  "reach": 10000,
+  "views": 14500,
+  "shares": 650,
+  "saved": 900,
+  "likes": 1200,
+  "comments": 140,
+  "ig_reels_avg_watch_time": 11800,
+  "reels_skip_rate": 0.31,
+  "follows": 120,
+  "_provenance": {
+    "reach": {"kind": "meta_api", "scope": "single_media", "api_version": "v26.0"},
+    "follows": {"kind": "instagram_dashboard", "scope": "single_media"}
+  }
+}
+

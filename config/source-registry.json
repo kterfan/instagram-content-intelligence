@@ -1,0 +1,83 @@
+{
+  "schema_version": "1.0",
+  "sources": [
+    {
+      "id": "instagram_hashtag_api",
+      "source_type": "platform_native",
+      "evidence_quality": 0.8,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["*"],
+      "latency_hours": 1,
+      "auth_mode": "meta_facebook_login",
+      "terms_url": "https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag-search",
+      "enabled": true,
+      "limitations": ["30 unique hashtag queries per rolling seven days", "hashtag vocabulary is not equivalent to topic demand"]
+    },
+    {
+      "id": "google_trends_export",
+      "source_type": "search_interest",
+      "evidence_quality": 0.75,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["*"],
+      "latency_hours": 24,
+      "auth_mode": "manual_csv_export",
+      "terms_url": "https://support.google.com/trends/answer/4365533",
+      "enabled": true,
+      "limitations": ["sampled and normalized 0-100", "not absolute search volume", "low-volume terms can be noisy"]
+    },
+    {
+      "id": "rss_atom",
+      "source_type": "publisher_feed",
+      "evidence_quality": 0.55,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["*"],
+      "latency_hours": 1,
+      "auth_mode": "none_or_feed_specific",
+      "enabled": false,
+      "limitations": ["quality depends on the configured publisher allowlist", "publication frequency varies by source"]
+    },
+    {
+      "id": "crossref",
+      "source_type": "scholarly_metadata",
+      "evidence_quality": 0.85,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["science", "health", "education", "technology", "research"],
+      "latency_hours": 24,
+      "auth_mode": "none_polite_pool_recommended",
+      "terms_url": "https://www.crossref.org/documentation/retrieve-metadata/rest-api/",
+      "enabled": false,
+      "limitations": ["metadata completeness varies by depositor", "abstract copyright can differ"]
+    },
+    {
+      "id": "pubmed",
+      "source_type": "biomedical_index",
+      "evidence_quality": 0.9,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["health", "medicine", "psychology", "biomedical_research"],
+      "latency_hours": 24,
+      "auth_mode": "ncbi_api_key_recommended",
+      "terms_url": "https://www.ncbi.nlm.nih.gov/home/develop/api/",
+      "enabled": false,
+      "limitations": ["not suitable as a popularity signal for unrelated niches", "indexing date and publication date are distinct"]
+    },
+    {
+      "id": "reddit_authorized",
+      "source_type": "community_discussion",
+      "evidence_quality": 0.5,
+      "languages": ["*"],
+      "regions": ["*"],
+      "categories": ["*"],
+      "latency_hours": 1,
+      "auth_mode": "official_reddit_platform",
+      "terms_url": "https://developers.reddit.com/docs/guidelines",
+      "enabled": false,
+      "limitations": ["community demographics are not population-representative", "authorized access and rate limits required"]
+    }
+  ]
+}
+
