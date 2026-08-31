@@ -11,7 +11,7 @@
 
 ## Controls
 
-- All nine skill directories pass the local Skill Security Auditor with zero findings.
+- All ten skill directories pass the local Skill Security Auditor with zero findings.
 - Media commands use `subprocess.run` with argument arrays and never `shell=True`.
 - The Reel pipeline accepts local files and an explicit permission basis; no downloader is included.
 - Meta tokens are read from environment variables, URL-log redaction is tested, and Graph hosts are allowlisted to `graph.instagram.com` or `graph.facebook.com`.
@@ -22,4 +22,3 @@
 ## Scanner review
 
 A repository-root static scan flags expected plugin dot-directories, the allowlisted Meta HTTP client, and documented base64 image decoding. These are reviewed architectural capabilities, not hidden behavior. Scanning each distributable `skills/*` directory independently returns PASS. Root scanner findings should still be reviewed whenever network or binary handling changes.
-

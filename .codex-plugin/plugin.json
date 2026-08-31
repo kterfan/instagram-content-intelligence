@@ -1,7 +1,7 @@
 {
   "name": "instagram-content-intelligence",
-  "version": "0.1.1",
-  "description": "Evidence-backed Instagram strategy, trend intelligence, insights analytics, Reel reverse engineering, Story design, and visual generation.",
+  "version": "0.2.0",
+  "description": "Evidence-backed Instagram strategy, Brand Voice, trend intelligence, Insights analytics, cloud/local Reel reverse engineering, Story design, and visual generation.",
   "author": {
     "name": "Erfan (kterfan)"
   },
@@ -9,7 +9,7 @@
   "interface": {
     "displayName": "Instagram Content Intelligence",
     "shortDescription": "Research, design, measure, and improve Instagram content.",
-    "longDescription": "A general-purpose Instagram intelligence system with source-aware trend research, configurable Content Matrix planning, Insights analytics, Story drop-off control, Reel reverse engineering, image generation, and reproducible benchmarks.",
+    "longDescription": "A general-purpose Instagram intelligence system with validated Brand Voice, source-aware trend research, configurable Content Matrix planning, Insights analytics, Story drop-off control, cloud/local Reel forensics, image generation, and reproducible benchmarks.",
     "developerName": "Erfan (kterfan)",
     "category": "Productivity",
     "capabilities": [],

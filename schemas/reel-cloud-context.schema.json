@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/reel-cloud-context.schema.json",
+  "title": "Cloud Reel Analysis Context",
+  "type": "object",
+  "required": ["permission_basis", "objective", "language"],
+  "properties": {
+    "permission_basis": {
+      "enum": ["owned", "licensed", "user_provided", "public_reference"]
+    },
+    "media": {"type": ["string", "null"]},
+    "objective": {"type": "string", "minLength": 1},
+    "language": {"type": "string", "minLength": 2},
+    "region": {"type": ["string", "null"]},
+    "audience_job": {"type": ["string", "null"]},
+    "account_profile": {"type": "object"},
+    "brand_voice": {"type": "object"},
+    "matrix_candidate": {"type": "object"},
+    "insights": {"type": "object"},
+    "adaptation_distance": {
+      "enum": ["close-structure", "moderate", "distant", "all-three"]
+    }
+  },
+  "additionalProperties": true
+}

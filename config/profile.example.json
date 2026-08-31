@@ -4,7 +4,21 @@
     "language": "fa",
     "region": "IR",
     "categories": ["education"],
-    "risk_tolerance": 0.35
+    "risk_tolerance": 0.35,
+    "audience_segments": [],
+    "jobs_pains_gains": [],
+    "promise": null,
+    "differentiators": [],
+    "proof": [],
+    "prohibited_claims": [],
+    "content_capabilities": [],
+    "conversion_paths": []
+  },
+  "brand_voice": {
+    "dna_path": null,
+    "version": null,
+    "status": "missing",
+    "gaps": ["Run instagram-brand-voice before voice-sensitive production"]
   },
   "trend": {
     "horizon_hours": 168,
@@ -26,4 +40,3 @@
     "min_coverage": {"objective": 3, "intent_stage": 3, "pillar": 3}
   }
 }
-

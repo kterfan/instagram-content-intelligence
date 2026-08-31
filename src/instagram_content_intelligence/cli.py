@@ -7,6 +7,16 @@ from dataclasses import fields
 from pathlib import Path
 from typing import Any
 
+from .brand_voice import (
+    build_blind_test,
+    build_interview,
+    build_voice_dna,
+    evaluate_blind_test,
+    detect_voice_drift,
+    rank_candidates,
+    score_voice_fit,
+)
+from .cloud_reel import align_retention, audit_cloud_result, build_prompt_pack, compare_reports, verify_hybrid
 from .insights import analyze_account_distribution, analyze_reel, analyze_story_sequence
 from .doctor import environment_report
 from .matrix import ContentCandidate, MatrixConfig, select_portfolio
@@ -84,8 +94,49 @@ def cmd_reel(args: argparse.Namespace) -> None:
             language=args.language,
             strict=args.strict,
         )
+    elif args.action == "prompt-pack":
+        result = build_prompt_pack(
+            _load(args.input),
+            args.provider,
+            args.output_dir,
+            mode=args.mode,
+        )
+    elif args.action == "audit":
+        result = audit_cloud_result(
+            _load(args.input),
+            _load(args.manifest) if args.manifest else None,
+        )
+    elif args.action == "compare":
+        payload = _load(args.input)
+        result = compare_reports(payload["reports"] if isinstance(payload, dict) else payload)
+    elif args.action == "align-retention":
+        result = align_retention(_load(args.input), _load(args.insights), drop_threshold=args.drop_threshold)
+    elif args.action == "hybrid-verify":
+        result = verify_hybrid(_load(args.input), _load(args.measured), tolerance_seconds=args.tolerance_seconds)
     else:
         result = analyze_measured_features(_load(args.input))
+    _write(result, args.output)
+
+
+def cmd_voice(args: argparse.Namespace) -> None:
+    payload = _load(args.input)
+    if args.action == "interview":
+        result = build_interview(payload)
+    elif args.action == "dna":
+        result = build_voice_dna(payload)
+    elif args.action == "score":
+        text = args.text if args.text is not None else payload["text"]
+        dna = _load(args.dna) if args.dna else payload["dna"]
+        result = score_voice_fit(text, dna)
+    elif args.action == "blind-test":
+        candidates = payload["candidates"] if isinstance(payload, dict) else payload
+        result = build_blind_test(candidates, seed=args.seed)
+    elif args.action == "evaluate":
+        result = evaluate_blind_test(payload["pack"], payload["selections"])
+    elif args.action == "drift":
+        result = detect_voice_drift(payload["previous"], payload["current"], threshold=args.drift_threshold)
+    else:
+        result = rank_candidates(payload["candidates"], payload["dna"])
     _write(result, args.output)
 
 
@@ -136,7 +187,13 @@ def build_parser() -> argparse.ArgumentParser:
     story.set_defaults(func=cmd_story_plan)
 
     reel = sub.add_parser("reel")
-    reel.add_argument("action", choices=("toolchain", "probe", "manifest", "pipeline", "features"))
+    reel.add_argument(
+        "action",
+        choices=(
+            "toolchain", "probe", "manifest", "pipeline", "features",
+            "prompt-pack", "audit", "compare", "align-retention", "hybrid-verify",
+        ),
+    )
     reel.add_argument("--media")
     reel.add_argument("--permission-basis", default="user_provided")
     reel.add_argument("--input")
@@ -144,8 +201,25 @@ def build_parser() -> argparse.ArgumentParser:
     reel.add_argument("--whisper-model", default="turbo")
     reel.add_argument("--language")
     reel.add_argument("--strict", action="store_true")
+    reel.add_argument("--provider", default="gemini", choices=("gemini", "chatgpt", "claude", "other"))
+    reel.add_argument("--mode", choices=("cloud-video-native", "cloud-evidence-pack", "local-measured", "hybrid-verified"))
+    reel.add_argument("--manifest")
+    reel.add_argument("--insights")
+    reel.add_argument("--drop-threshold", type=float, default=0.08)
+    reel.add_argument("--measured")
+    reel.add_argument("--tolerance-seconds", type=float, default=0.75)
     reel.add_argument("--output")
     reel.set_defaults(func=cmd_reel)
+
+    voice = sub.add_parser("voice")
+    voice.add_argument("action", choices=("interview", "dna", "score", "blind-test", "evaluate", "rank", "drift"))
+    voice.add_argument("--input", required=True)
+    voice.add_argument("--dna")
+    voice.add_argument("--text")
+    voice.add_argument("--seed", type=int, default=0)
+    voice.add_argument("--drift-threshold", type=float, default=0.2)
+    voice.add_argument("--output")
+    voice.set_defaults(func=cmd_voice)
 
     visual = sub.add_parser("visual")
     visual.add_argument("--headline", required=True)

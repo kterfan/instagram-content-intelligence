@@ -1,0 +1,23 @@
+{
+  "permission_basis": "user_provided",
+  "media": "attach-the-authorized-reel.mp4",
+  "objective": "Reverse engineer reusable retention mechanisms and create original test concepts",
+  "language": "fa",
+  "region": "IR",
+  "audience_job": "Understand a difficult idea quickly",
+  "account_profile": {
+    "category": "education",
+    "conversion_path": "profile_follow"
+  },
+  "brand_voice": {
+    "status": "draft-with-gaps",
+    "lexical": {"preferred": [], "forbidden": []}
+  },
+  "matrix_candidate": {
+    "surface": "reel",
+    "format": "explainer",
+    "narrative": "promise-proof-payoff"
+  },
+  "insights": {},
+  "adaptation_distance": "all-three"
+}

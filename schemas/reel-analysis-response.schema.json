@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/reel-analysis-response.schema.json",
+  "title": "Instagram Reel Analysis Response",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "metadata",
+    "observations",
+    "interpretations",
+    "mechanisms",
+    "adaptations",
+    "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "metadata": {
+      "type": "object",
+      "required": ["provider", "mode", "video_duration_seconds", "audio_interpreted", "coverage"],
+      "properties": {
+        "provider": {"type": "string"},
+        "model_or_surface": {"type": ["string", "null"]},
+        "mode": {
+          "enum": ["cloud-video-native", "cloud-evidence-pack", "local-measured", "hybrid-verified"]
+        },
+        "video_duration_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "audio_interpreted": {"type": "boolean"},
+        "coverage": {
+          "type": "object",
+          "required": ["start_seconds", "end_seconds"],
+          "properties": {
+            "start_seconds": {"type": "number", "minimum": 0},
+            "end_seconds": {"type": "number", "minimum": 0}
+          }
+        },
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "start_seconds", "end_seconds", "kind", "evidence", "confidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "start_seconds": {"type": "number", "minimum": 0},
+          "end_seconds": {"type": "number", "minimum": 0},
+          "kind": {"enum": ["speech", "overlay", "visual", "edit", "audio", "performance", "other"]},
+          "evidence": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "evidence_ids", "confidence", "alternative_explanations"],
+        "properties": {
+          "claim": {"type": "string"},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "alternative_explanations": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+          "requires_insights": {"type": "boolean"}
+        }
+      }
+    },
+    "mechanisms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "evidence_ids", "reusable_principle", "must_change"],
+        "properties": {
+          "name": {"type": "string"},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "reusable_principle": {"type": "string"},
+          "must_change": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "adaptations": {"type": "array", "minItems": 3, "items": {"type": "object"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}}
+  }
+}

@@ -14,10 +14,11 @@ Resolve `PLUGIN_ROOT` before opening templates: in Claude Code use `${CLAUDE_PLU
 ## Workflow
 
 1. Inspect existing account material before asking for information already available.
-2. Record language, region, audience segments, jobs/pains/gains, promise, differentiators, proof, prohibited claims, risk tolerance, content capabilities, brand tokens, and conversion paths.
+2. Record language, region, audience segments, jobs/pains/gains, promise, differentiators, proof, prohibited claims, risk tolerance, content capabilities, brand tokens, conversion paths, and the path to a versioned Voice DNA.
 3. Separate confirmed facts, owner preferences, observed performance, and hypotheses.
 4. Define primary and counter-metrics for each business objective.
 5. Save the result using `${PLUGIN_ROOT}/config/profile.example.json` as a structural reference. Do not put secrets or access tokens in the profile.
+6. When voice is missing, generic, disputed, or stale, use `instagram-brand-voice`; Account Foundation must not invent a validated voice from a few adjectives.
 
 ## Quality gate
 
@@ -25,3 +26,4 @@ Resolve `PLUGIN_ROOT` before opening templates: in Claude Code use `${CLAUDE_PLU
 - Every factual or performance claim has provenance.
 - Missing facts remain explicit gaps.
 - A later skill can select sources and matrix dimensions solely from this profile.
+- The profile links to Voice DNA status and gaps without duplicating its evidence corpus.

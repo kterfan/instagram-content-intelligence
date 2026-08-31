@@ -83,8 +83,8 @@ def main() -> None:
             errors.append("Marketplace category metadata is in the wrong location")
 
     skill_files = sorted((ROOT / "skills").glob("*/SKILL.md"))
-    if len(skill_files) != 9:
-        errors.append(f"Expected exactly nine Instagram skills, found {len(skill_files)}")
+    if len(skill_files) != 10:
+        errors.append(f"Expected exactly ten Instagram skills, found {len(skill_files)}")
     for path in skill_files:
         content = path.read_text(encoding="utf-8")
         match = re.search(r"^name:\s*([^\s]+)\s*$", content, re.MULTILINE)
@@ -100,6 +100,18 @@ def main() -> None:
         errors.append("Out-of-scope platform skill found")
     if not (ROOT / "scripts" / "ici.py").is_file():
         errors.append("Installation-free plugin runner is missing")
+    for required_schema in (
+        "reel-cloud-context.schema.json",
+        "reel-analysis-response.schema.json",
+        "brand-voice-dna.schema.json",
+    ):
+        try:
+            _json(ROOT / "schemas" / required_schema)
+        except ValueError as exc:
+            errors.append(str(exc))
+    for required_module in ("cloud_reel.py", "brand_voice.py"):
+        if not (ROOT / "src" / "instagram_content_intelligence" / required_module).is_file():
+            errors.append(f"Missing implementation module: {required_module}")
 
     registry = _json(ROOT / "config" / "source-registry.json")
     for source in registry["sources"]:

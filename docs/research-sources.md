@@ -6,6 +6,10 @@ Primary or original sources were preferred. Practitioner frameworks are identifi
 |---|---|---|---|
 | Insights overview | [Meta Instagram Platform Insights](https://developers.facebook.com/docs/instagram-platform/insights/) | permissions, endpoints, availability | login variant and access level differ |
 | Media metrics | [Meta Instagram Media Insights](https://developers.facebook.com/docs/instagram-platform/reference/instagram-media/insights) | Reel/Story metrics, breakdowns, delay, retention | several fields estimated/in development |
+| Native video understanding | [Gemini API video understanding](https://ai.google.dev/gemini-api/docs/video-understanding) | Direct video/audio prompting, timestamps, sampling behavior | default sampling can miss rapid events |
+| Gemini app uploads | [Gemini Apps file upload help](https://support.google.com/gemini/answer/14903178) | Product upload types and account/plan limits | limits vary by plan and availability |
+| ChatGPT video attachment | [OpenAI ChatGPT image inputs FAQ](https://help.openai.com/en/articles/8400551) | Product-level video attachment and explicit completeness caveat | may not inspect whole video/audio |
+| Claude visual inputs | [Anthropic vision](https://docs.anthropic.com/en/docs/build-with-claude/vision) | Documented image route used by evidence packs | no general native-video contract documented in reviewed guide |
 | Account metrics | [Meta Instagram Account Insights](https://developers.facebook.com/docs/instagram-platform/api-reference/instagram-user/insights) | follower/media-product breakdowns | account interval is not per-media attribution; naming inconsistency must be validated live |
 | Reel Dashboard | [Instagram Help: Reel insights](https://www.facebook.com/help/instagram/202865988324236) | UI views, watch time, viewers, follows | Dashboard surface is not an API contract |
 | Account Dashboard | [Instagram Help: account/content insights](https://www.facebook.com/help/instagram/1533933820244654) | 90-day web range and public-account requirements | visible fields can vary by account type |
@@ -26,4 +30,3 @@ Primary or original sources were preferred. Practitioner frameworks are identifi
 | Persian font | [Vazirmatn](https://github.com/rastikerdar/vazirmatn) | redistributable RTL typography | verify renderer and fallback fonts |
 | Image API | [OpenAI image generation guide](https://developers.openai.com/api/docs/guides/image-generation) | generation/edit provider adapter | model availability, cost, and access evolve |
 | Codex skills | [OpenAI Build skills](https://developers.openai.com/codex/build-skills) | plugin/skill packaging | host dependencies must be explicit |
-

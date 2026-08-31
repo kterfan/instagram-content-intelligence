@@ -1,5 +1,13 @@
 # Versions
 
+## 0.2.0 — 2026-08-31
+
+- Added first-class cloud-native Reel Prompt Packs for Gemini and compatible ChatGPT surfaces, plus Claude evidence-pack routing.
+- Added a portable Reel response schema, completeness/grounding audit, timestamped retention alignment, and cross-report mechanism comparison.
+- Kept local media tooling optional and defined hybrid cloud/local verification as the highest-confidence mode.
+- Added the `instagram-brand-voice` Skill with adaptive interview gaps, corpus-derived Voice DNA, heuristic fit/ranking, blinded owner tests, format variants, and drift guidance.
+- Expanded account/reel/script Skills, examples, schemas, documentation, tests, benchmarks, and packaging validation.
+
 ## 0.1.1 — 2026-08-29
 
 - Replaced stale upstream Claude marketplace identity and metadata.

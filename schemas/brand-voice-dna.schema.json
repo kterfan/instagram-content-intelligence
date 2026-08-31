@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/brand-voice-dna.schema.json",
+  "title": "Instagram Brand Voice DNA",
+  "type": "object",
+  "required": ["schema_version", "version", "identity", "dimensions", "lexical", "rhythm", "mechanics", "evidence", "gaps", "status"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "version": {"type": "string"},
+    "identity": {"type": "object"},
+    "dimensions": {
+      "type": "object",
+      "properties": {
+        "directness": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "warmth": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "humor": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "authority": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "emotional_intensity": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "formality": {"type": ["number", "null"], "minimum": 0, "maximum": 1},
+        "metaphor_density": {"type": ["number", "null"], "minimum": 0, "maximum": 1}
+      }
+    },
+    "lexical": {"type": "object"},
+    "rhythm": {"type": "object"},
+    "mechanics": {"type": "object"},
+    "format_variants": {"type": ["object", "string"]},
+    "evidence": {"type": "object"},
+    "gaps": {"type": "array", "items": {"type": "string"}},
+    "status": {"enum": ["draft-with-gaps", "validated-input-ready"]}
+  }
+}

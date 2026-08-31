@@ -1,6 +1,6 @@
 # Instagram Content Intelligence
 
-An evidence-backed, general-purpose Instagram system for strategy, trend research, Insights analytics, Story retention, Reel reverse engineering, visual generation, and reproducible experimentation.
+An evidence-backed, general-purpose Instagram system for strategy, trend research, Insights analytics, Story retention, cloud/local Reel reverse engineering, validated Brand Voice, visual generation, and reproducible experimentation.
 
 It is a Codex plugin **and** a deterministic Python toolkit. It is not a collection of prompts. LinkedIn and YouTube are intentionally out of scope.
 
@@ -10,7 +10,8 @@ It is a Codex plugin **and** a deterministic Python toolkit. It is not a collect
 - General trend intelligence for any account, language, country, or category. It scores velocity, acceleration, recency, source convergence, relevance, evidence quality, saturation, and risk while retaining source limitations.
 - Explicit Instagram data provenance. Meta API, Professional Dashboard, manual import, derived metric, and model inference are never silently mixed.
 - Story sequence design and frame-level drop-off diagnostics.
-- Local Reel reverse engineering with ffprobe/FFmpeg, Whisper, PySceneDetect, and Persian-capable Tesseract. Measured features are separated from interpretation.
+- Cloud-native Reel Prompt Packs for Gemini and compatible ChatGPT surfaces, evidence packs for Claude, optional local measurement, hybrid verification, response audit, retention alignment, and cross-report comparison.
+- A Brand Voice Interview Engine that combines adaptive questions, positive/negative samples, versioned Voice DNA, heuristic screening, blind owner validation, and format variants.
 - Internal image generation through provider adapters plus deterministic Persian/RTL typography and Playwright overflow QA.
 - Reproducible unit tests, schemas, synthetic fixtures, and benchmarks.
 
@@ -35,7 +36,7 @@ python -m pip install -e ".[reels,visual,dev]"
 playwright install chromium
 ```
 
-System packages for the full Reel pipeline: `ffmpeg`/`ffprobe`, Tesseract with `fas` language data, and the dependencies documented by Whisper and PySceneDetect.
+System packages for the optional local/hybrid Reel measurement path: `ffmpeg`/`ffprobe`, Tesseract with `fas` language data, and the dependencies documented by Whisper and PySceneDetect. They are not required to generate a cloud Prompt Pack.
 
 ## Quick start
 
@@ -46,6 +47,11 @@ ici insights reel examples/reel-insights.json --duration 31
 ici insights story examples/story-insights.json
 ici reel toolchain
 ici reel manifest --media my-reel.mp4 --permission-basis owned
+ici reel prompt-pack --input examples/reel-cloud-context.json --provider gemini --output-dir reel-pack
+ici reel audit --input model-response.json --manifest reel-pack/reel-analysis-manifest.json
+ici reel hybrid-verify --input model-response.json --measured measured_features.json
+ici voice interview --input examples/brand-voice-interview.json
+ici voice dna --input examples/brand-voice-interview.json --output voice-dna.json
 ici visual --headline "یک تیتر دقیق" --body "متن فارسی بدون حدس در تصویر" --html frame.html --png frame.png
 ```
 
@@ -54,7 +60,7 @@ For an installed plugin, replace `ici` with `python "${PLUGIN_ROOT}/scripts/ici.
 Run quality gates:
 
 ```bash
-python -m unittest discover -s tests -v
+python -m unittest discover -s tests -t . -v
 python benchmarks/run_benchmarks.py
 ```
 
@@ -66,25 +72,26 @@ python benchmarks/run_benchmarks.py
 - Shared skills: `skills/*/SKILL.md`
 - Installation-free runtime: `scripts/ici.py`
 
-All four version-bearing files are checked for exact version parity in CI.
+All version-bearing manifests and package files are checked for exact version parity in CI.
 
 ## Skills
 
 | Skill | Responsibility |
 |---|---|
-| `instagram-account-foundation` | General account context, evidence, brand, constraints, and measurement |
+| `instagram-account-foundation` | General account context, evidence, constraints, measurement, and Voice DNA linkage |
+| `instagram-brand-voice` | Adaptive interview, corpus evidence, Voice DNA, blind validation, and drift control |
 | `instagram-content-matrix` | Multidimensional portfolio design, scoring, coverage, and diversity |
 | `instagram-trend-intelligence` | Multi-source, source-aware trend research for any account |
 | `instagram-insights-analyst` | Reel, Story, post, and account Insights with scope/provenance rules |
 | `instagram-story-sequence` | Story narrative continuity and frame-loss control |
-| `instagram-reel-reverse-engineering` | Measured transcript/shot/OCR/audio teardown without copying |
+| `instagram-reel-reverse-engineering` | Cloud-native/evidence/local/hybrid teardown, audit, retention alignment, and originality-safe adaptation |
 | `instagram-reel-script` | Original timecoded Reel production briefs |
 | `instagram-visual-generator` | Provider image generation plus deterministic RTL rendering |
 | `instagram-experiment-lab` | Experiments, tests, and benchmarks |
 
 ## Data boundaries
 
-The project does not scrape or download third-party Reels. Reverse engineering accepts owned, licensed, user-provided, or otherwise authorized local files. Private account exports and tokens must not be committed. Use synthetic or redistributable fixtures in public tests.
+The project does not scrape or download third-party Reels. Reverse engineering accepts owned, licensed, user-provided, or otherwise authorized files/evidence packs. Private account exports, media, voice corpora, and tokens must not be committed. Use synthetic or redistributable fixtures in public tests. Cloud upload is a user choice and remains subject to the selected provider's account, retention, and privacy settings.
 
 Current Meta documentation contains important scope differences: account follower/non-follower breakdown is not automatically a per-media metric; some Dashboard Reel fields are not listed on the current media-insights endpoint; Story availability is time-sensitive; and several values are estimated or in development. See [the metrics catalog](docs/metrics-catalog.md).
 
