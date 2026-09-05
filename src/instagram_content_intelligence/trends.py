@@ -6,6 +6,8 @@ from dataclasses import asdict, dataclass, field
 from datetime import datetime, timezone
 from typing import Iterable
 
+from .persian import comparison_key
+
 
 @dataclass(frozen=True)
 class SourceDescriptor:
@@ -64,6 +66,7 @@ class TrendProfile:
     saturation_penalty: float = 0.18
     risk_penalty: float = 0.22
     weights: dict[str, float] = field(default_factory=lambda: dict(DEFAULT_WEIGHTS))
+    allow_unknown_locale: bool = True
 
 
 def _clamp(value: float, low: float = 0.0, high: float = 1.0) -> float:
@@ -111,14 +114,33 @@ def score_trends(
     source_map = {source.id: source for source in sources}
     categories = set(profile.categories)
     usable: list[TrendObservation] = []
+    seen: set[tuple] = set()
     for observation in observations:
         source = source_map.get(observation.source_id)
         if not source:
             continue
         if not source.supports(profile.language, profile.region, categories):
             continue
+        locale_pairs = ((observation.language, profile.language), (observation.region, profile.region))
+        if any(actual != "*" and actual.casefold() != expected.casefold()
+               for actual, expected in locale_pairs):
+            continue
+        if not profile.allow_unknown_locale and "*" in (observation.language, observation.region):
+            continue
         age = (current - _parse_time(observation.observed_at)).total_seconds() / 3600
         if age <= profile.horizon_hours and age >= 0:
+            # Exact repeated measurements (including equivalent spellings/timezones)
+            # are not additional evidence. Distinct times and sources remain distinct.
+            identity = (
+                comparison_key(observation.topic), observation.source_id,
+                _parse_time(observation.observed_at), observation.value,
+                observation.baseline, observation.acceleration, observation.saturation,
+                observation.risk, observation.language.casefold(), observation.region.casefold(),
+                tuple(sorted(set(observation.categories))), observation.evidence_url,
+            )
+            if identity in seen:
+                continue
+            seen.add(identity)
             usable.append(observation)
 
     velocities = [
@@ -129,10 +151,9 @@ def score_trends(
 
     grouped: dict[str, list[tuple[TrendObservation, float, float]]] = {}
     for item, velocity, acceleration in zip(usable, scaled_velocity, scaled_acceleration):
-        grouped.setdefault(item.topic.strip().casefold(), []).append((item, velocity, acceleration))
+        grouped.setdefault(comparison_key(item.topic), []).append((item, velocity, acceleration))
 
     weights = _weight_map(profile)
-    total_enabled_sources = max(1, len({item.source_id for item in usable}))
     results: list[dict] = []
     for topic_key, rows in grouped.items():
         distinct_sources = {row[0].source_id for row in rows}
@@ -184,6 +205,10 @@ def score_trends(
                 "confidence": round(confidence, 6),
                 "source_count": len(distinct_sources),
                 "observation_count": len(rows),
+                "unknown_locale_observation_count": sum(
+                    "*" in (row[0].language, row[0].region) for row in rows
+                ),
+                "confidence_kind": "heuristic_not_calibrated_probability",
                 "components": {key: round(value, 6) for key, value in components.items()},
                 "penalties": {
                     "saturation": round(saturation, 6),

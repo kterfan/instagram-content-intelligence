@@ -1,12 +1,20 @@
 from __future__ import annotations
 
 import hashlib
+import math
 import random
 import re
 import unicodedata
 from collections import Counter
 from statistics import mean
 from typing import Any
+
+from .persian import comparison_key, contains_phrase
+
+NUMERIC_DIMENSIONS = {
+    "directness", "warmth", "humor", "authority", "emotional_intensity",
+    "formality", "metaphor_density",
+}
 
 
 QUESTION_BANK = [
@@ -41,7 +49,7 @@ def build_interview(payload: dict[str, Any]) -> dict[str, Any]:
     questions = [
         {"id": key, "question": question, "section": section}
         for key, question, section in QUESTION_BANK
-        if _missing(answers.get(key))
+        if _missing(answers.get(key)) or (key in NUMERIC_DIMENSIONS and _bounded(answers.get(key)) is None)
     ]
     evidence_requests = []
     if len(payload.get("positive_samples", [])) < 3:
@@ -56,7 +64,7 @@ def build_interview(payload: dict[str, Any]) -> dict[str, Any]:
         "total": len(QUESTION_BANK),
         "questions": questions,
         "evidence_requests": evidence_requests,
-        "next_step": "voice-dna" if not questions else "continue-interview",
+        "next_step": "voice-dna" if not questions and not evidence_requests else "continue-interview",
     }
 
 
@@ -71,7 +79,8 @@ def build_voice_dna(payload: dict[str, Any]) -> dict[str, Any]:
     preferred = _as_list(answers.get("preferred_words"))
     preferred.extend(_distinctive_words(positive, negative)[:12])
     forbidden = _as_list(answers.get("forbidden_phrases"))
-    gaps = [key for key, _, _ in QUESTION_BANK if _missing(answers.get(key))]
+    gaps = [key for key, _, _ in QUESTION_BANK if _missing(answers.get(key))
+            or (key in NUMERIC_DIMENSIONS and _bounded(answers.get(key)) is None)]
     if len(positive) < 3:
         gaps.append("positive_samples<3")
     if len(negative) < 2:
@@ -126,11 +135,10 @@ def build_voice_dna(payload: dict[str, Any]) -> dict[str, Any]:
 
 def score_voice_fit(text: str, dna: dict[str, Any]) -> dict[str, Any]:
     lexical = dna.get("lexical", {})
-    preferred = [item.lower() for item in lexical.get("preferred", [])]
-    forbidden = [item.lower() for item in lexical.get("forbidden", [])]
-    lowered = text.lower()
-    preferred_hits = [item for item in preferred if item and item in lowered]
-    forbidden_hits = [item for item in forbidden if item and item in lowered]
+    preferred = list({comparison_key(item): item for item in lexical.get("preferred", [])}.values())
+    forbidden = list({comparison_key(item): item for item in lexical.get("forbidden", [])}.values())
+    preferred_hits = [item for item in preferred if contains_phrase(text, item)]
+    forbidden_hits = [item for item in forbidden if contains_phrase(text, item)]
     stats = _corpus_stats([text])
     target = dna.get("rhythm", {}).get("observed_average_sentence_words")
     if target:
@@ -279,14 +287,15 @@ def _as_list(value: Any) -> list[str]:
         return []
     if isinstance(value, list):
         return [str(item) for item in value]
-    return [part.strip() for part in str(value).split(",") if part.strip()]
+    return [part.strip() for part in re.split("[,،]", str(value)) if part.strip()]
 
 
 def _bounded(value: Any) -> float | None:
-    if value is None or value == "":
+    if value is None or value == "" or isinstance(value, bool):
         return None
     try:
-        return round(max(0.0, min(1.0, float(value))), 4)
+        number = float(comparison_key(str(value)).replace("٫", "."))
+        return round(number, 4) if math.isfinite(number) and 0 <= number <= 1 else None
     except (TypeError, ValueError):
         return None
 
@@ -312,5 +321,5 @@ def _fingerprint(texts: list[str]) -> str | None:
 def _tokens(text: str) -> list[str]:
     return re.findall(
         r"[A-Za-z0-9_\u0621-\u063A\u0641-\u064A\u0660-\u0669\u0671-\u06D3\u06F0-\u06F9]+",
-        text.lower(),
+        comparison_key(text),
     )

@@ -4,7 +4,17 @@
   "type": "object",
   "required": ["profile", "sources", "observations"],
   "properties": {
-    "profile": {"type": "object", "required": ["language", "region", "categories"]},
+    "profile": {
+      "type": "object",
+      "required": ["language", "region", "categories"],
+      "properties": {
+        "allow_unknown_locale": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow observations with unknown (*) language or region; output counts them explicitly. Set false for verified-locale-only research."
+        }
+      }
+    },
     "sources": {"type": "array", "items": {"type": "object", "required": ["id", "source_type", "evidence_quality"]}},
     "observations": {"type": "array", "items": {"type": "object", "required": ["topic", "source_id", "observed_at", "value", "baseline"]}}
   }

@@ -1,5 +1,13 @@
 # Versions
 
+## Unreleased
+
+- Share conservative Persian comparison keys across trend grouping and brand-voice matching without rewriting display copy.
+- Filter observation-level locale, disclose unknown locale, and deduplicate repeated measurements before trend scoring.
+- Preserve missing/partial interaction and account-distribution inputs instead of reporting misleading zero or 100% rates.
+- Keep invalid numeric voice answers as gaps; accept Persian decimal answers and comma-separated vocabulary.
+- Add Persian regression coverage and document compatibility changes.
+
 ## 0.2.0 — 2026-08-31
 
 - Added first-class cloud-native Reel Prompt Packs for Gemini and compatible ChatGPT surfaces, plus Claude evidence-pack routing.
