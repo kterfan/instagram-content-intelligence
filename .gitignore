@@ -11,6 +11,9 @@ build/
 .env.*
 !.env.example
 private/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
 outputs/
 *.mp4
 *.mov

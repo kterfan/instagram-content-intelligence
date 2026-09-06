@@ -30,4 +30,12 @@ For full provider generation, call `generate_story_visual` from `instagram_conte
 
 ## Output
 
+The renderer bundles licensed Vazirmatn and embeds it locally. Use `--surface carousel`
+or `--surface cover` for the 1080×1350 preset, and `story`/`reel` for 1080×1920.
+Presets and safe areas are design defaults, not permanent Instagram UI guarantees.
+For all frames of a versioned project use `workflow export --project <folder>
+--output-dir <folder> --png` via the same runner; see `${PLUGIN_ROOT}/docs/persian-workflow.md`.
+Inspect the produced images after automated font/overflow checks. Do not silently
+truncate dense text or treat HTML-only success as PNG success.
+
 Return the generation prompt, provider/model/version, seed if supported, background asset, exact copy, layout file, final PNG, and QA report.

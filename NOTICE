@@ -10,3 +10,10 @@ This project was developed from the Git history and MIT-licensed ideas of:
 The upstream license is retained in LICENSE. The current project has a different
 Instagram-only scope and a substantially rewritten implementation.
 
+Vazirmatn font
+--------------
+The bundled, unmodified Vazirmatn-Regular.woff2 is from
+https://github.com/rastikerdar/vazirmatn/tree/v33.003
+Copyright 2015 The Vazirmatn Project Authors.
+Licensed under SIL Open Font License 1.1; the full license is included at
+src/instagram_content_intelligence/assets/OFL-Vazirmatn.txt.

@@ -1,0 +1,16 @@
+[
+  {
+    "title": "نوروز — آغاز سال خورشیدی", "month": 1, "day": 1,
+    "source_url": "https://www.un.org/en/observances/international-nowruz-day",
+    "verified_on": "2026-09-05", "status": "verified",
+    "basis": "Cultural occasion at the spring equinox; mapped to Jalali 01-01. Not the separate UN observance fixed on March 21.",
+    "holiday_status": "not_asserted", "relevance_review_required": true
+  },
+  {
+    "title": "شب یلدا / چله", "month": 9, "day": 30,
+    "source_url": "https://ich.unesco.org/en/RL/yald-chella-01877",
+    "verified_on": "2026-09-05", "status": "verified",
+    "basis": "UNESCO describes the last night of autumn; mapped to Jalali 09-30.",
+    "holiday_status": "not_asserted", "relevance_review_required": true
+  }
+]

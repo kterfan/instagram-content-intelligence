@@ -105,6 +105,26 @@ This repository started from the Git history of Charlie Hills' MIT-licensed [`so
 
 ## فارسی
 
+نسخهٔ 0.3 گردش‌کار فارسی نسخه‌دار، تقویم شمسی و ICS، بسته تولید Reel/Story/Carousel،
+فونت همراه بسته، زیرنویس SRT/VTT، ثبت خصوصی آمار و ارزیابی کور کیفیت را اضافه می‌کند.
+[راهنمای کامل و مثال‌های قابل‌اجرا](docs/persian-workflow.md).
+
+```bash
+python scripts/ici.py workflow init --project private/my-account
+python scripts/ici.py workflow compose --project private/my-account
+python scripts/ici.py workflow export --project private/my-account --output-dir outputs/my-account
+```
+
+برای تقویم `pip install -e ".[calendar]"` و برای خروجی PNG گروه `visual` به‌همراه
+Chromium لازم است. هستهٔ تولید، زیرنویس، دفتر نتایج و ارزیابی انسانی وابستگی اجباری
+جدید ندارند. متن اصیل توسط کاربر یا Skill میزبان نوشته می‌شود؛ این ابزار انتشار
+خودکار یا ادعای تضمین رشد ندارد. رجیستری مناسبت‌ها فعلاً دو مناسبت فرهنگی دارای
+منبع است، نه تقویم کامل تعطیلات رسمی.
+
+راهنمای [پردازش فارسی و معنای داده ناقص](docs/persian-analysis.md) شامل
+یکسان‌سازی حروف و ارقام برای مقایسه، فیلتر زبان/کشور مشاهده، پاسخ عددی فارسی
+در مصاحبه لحن و تفکیک نبود آمار از نرخ صفر است.
+
 این پروژه برای یک حوزه خاص ساخته نشده است. زبان، کشور، دسته بندی، سطح ریسک، منابع ترند، وزن ها و محدودیت های Content Matrix همگی قابل تنظیم اند. داده `radio_erfun` فقط می تواند fixture خصوصی اعتبارسنجی باشد و هیچ داده خام خصوصی وارد ریپوی عمومی نمی شود.
 
 ## License

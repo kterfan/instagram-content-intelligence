@@ -42,7 +42,9 @@ def analyze_reel(metrics: dict[str, Any], duration_seconds: float | None = None)
     if average_watch_time_ms is None and watch_time_ms is not None and views:
         average_watch_time_ms = watch_time_ms / views
 
-    interaction_total = sum(value or 0 for value in (shares, saves, likes, comments))
+    interaction_fields = {"shares": shares, "saved": saves, "likes": likes, "comments": comments}
+    missing_interactions = [key for key, value in interaction_fields.items() if value is None]
+    interaction_total = None if missing_interactions else sum(interaction_fields.values())
     output: dict[str, Any] = {
         "ratios": {
             item.name: item.to_dict()
@@ -70,7 +72,16 @@ def analyze_reel(metrics: dict[str, Any], duration_seconds: float | None = None)
             "saved": saves,
         },
         "scope_warnings": [],
+        "interaction_coverage": {
+            "status": "complete" if not missing_interactions else (
+                "missing" if len(missing_interactions) == 4 else "partial"
+            ),
+            "missing_fields": missing_interactions,
+        },
     }
+
+    if missing_interactions:
+        output["ratios"]["interaction_per_reach"]["unavailable_reason"] = "missing_interaction_components"
 
     provenance = metrics.get("_provenance", {})
     for field in ("follows", "profile_visits", "profile_activity", "non_follower_reach"):
@@ -159,7 +170,7 @@ def analyze_story_sequence(frames: Iterable[dict[str, Any]]) -> dict[str, Any]:
 def analyze_account_distribution(metrics: dict[str, Any]) -> dict[str, Any]:
     followers = metrics.get("followers")
     non_followers = metrics.get("non_followers")
-    total = (followers or 0) + (non_followers or 0)
+    total = None if followers is None or non_followers is None else followers + non_followers
     return {
         "scope": metrics.get("scope", "account_interval"),
         "follower_share": safe_rate(followers, total),
