@@ -1,6 +1,6 @@
 # Versions
 
-## 0.3.0 — development, 2026-09-06
+## 0.3.0 — 2026-09-06
 
 - Added guided Persian project creation/composition, immutable content revisions, production contracts and exports for Reel, Story and Carousel.
 - Added optional Jalali conversion, timezone-aware UTC/ICS scheduling, and a sourced starter registry for Nowruz and Yalda.
