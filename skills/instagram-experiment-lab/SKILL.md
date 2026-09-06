@@ -19,12 +19,21 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 4. Store input fixture, account/profile version, content version, publish context, metric provenance, and analysis code revision.
 5. Run repository tests and benchmarks before claiming a workflow improvement:
 
-   - `python -m unittest discover -s "${PLUGIN_ROOT}/tests" -v`
+   - `python -m unittest discover -s "${PLUGIN_ROOT}/tests" -t "${PLUGIN_ROOT}" -v`
    - `python "${PLUGIN_ROOT}/benchmarks/run_benchmarks.py"`
 
 6. Report uncertainty and practical effect, not only winner/loser language.
 
 ## Benchmark families
+
+For Persian content quality, read `${PLUGIN_ROOT}/docs/persian-workflow.md` and use
+`evaluate prepare` / `evaluate score` via `python "${PLUGIN_ROOT}/scripts/ici.py"`.
+Give raters only `blind.json`; keep `answer-key.json` separate until ratings close.
+Use licensed or owned held-out samples; the six example candidates are synthetic
+workflow fixtures, not completed human validation. Missing ratings stay incomplete.
+Quality ratings and Instagram performance must be reported separately. For observed
+publication outcomes use the private `results` ledger; bootstrap intervals describe
+publication-level variation and do not establish causal effects.
 
 - Trend ranking invariance to raw source scale and sensitivity to convergence.
 - Content Matrix coverage, cap compliance, and diversity.

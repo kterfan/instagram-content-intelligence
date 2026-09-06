@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "instagram-content-intelligence"
-version = "0.2.0"
+version = "0.3.0"
 description = "Evidence-backed Instagram content intelligence, cloud Reel forensics, Brand Voice, analytics, and production toolkit"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -14,6 +14,7 @@ keywords = ["instagram", "content-strategy", "reels", "stories", "trend-intellig
 dependencies = []
 
 [project.optional-dependencies]
+calendar = ["jdatetime>=5.2,<7", "tzdata>=2025.2"]
 visual = ["openai>=1.0", "playwright>=1.40", "pillow>=10"]
 reels = ["openai-whisper", "scenedetect[opencv]>=0.6", "pytesseract>=0.3"]
 dev = ["pytest>=8", "pytest-cov>=5", "hypothesis>=6", "jsonschema>=4"]
@@ -26,6 +27,9 @@ package-dir = {"" = "src"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+instagram_content_intelligence = ["assets/*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

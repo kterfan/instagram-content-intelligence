@@ -20,4 +20,14 @@ Create an original script tied to a specific audience job and measurement object
 
 ## Output
 
+For machine-exportable production, resolve `PLUGIN_ROOT` two directories above this
+file (or use `${CLAUDE_PLUGIN_ROOT}`) and read `${PLUGIN_ROOT}/schemas/production.schema.json`.
+Write the original script in that contract with `authoring_provenance=model_draft`.
+Use `python "${PLUGIN_ROOT}/scripts/ici.py" workflow import --project <folder> --input <script.json>`
+then `workflow export --project <folder> --output-dir <output>` through the same runner.
+Read `${PLUGIN_ROOT}/docs/persian-workflow.md` for SRT/VTT, cover and shot-list exports.
+Resolve reading-load warnings before describing subtitles as ready. Timing remains
+estimated until checked against the actual recording; imported scripts require
+editorial review even when structural validation passes.
+
 Return production-ready timecodes, assets, capture notes, edit notes, text-safe zones, caption, cover concept, hypothesis, counter-metric, and experiment ID.

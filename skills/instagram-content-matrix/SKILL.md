@@ -31,4 +31,12 @@ Start with audience, job/pain/gain, intent stage, pillar, objective, Instagram s
 
 ## Output
 
+For local account history, `results compare` via the resolved runner returns
+`advisory_historical_priors` only for strata with enough publications. A prior is
+a within-stratum median rank, not a success probability. Map it to a candidate's
+`scores.historical_prior` only when account, surface, objective, window, traffic,
+source and experiment/variant applicability match; cite the comparison report.
+Do not overwrite profile weights automatically. See `${PLUGIN_ROOT}/docs/persian-workflow.md`
+for the ledger and `calendar` for optional sourced Jalali scheduling.
+
 Return the selected portfolio, rejected near-misses, coverage audit, score definitions, assumptions, and a measurement plan. Use `${PLUGIN_ROOT}/docs/content-matrix.md` for the evidence/design boundary.

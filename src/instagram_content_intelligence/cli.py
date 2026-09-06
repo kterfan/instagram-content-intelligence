@@ -24,6 +24,13 @@ from .reel_reverse import analyze_measured_features, build_analysis_manifest, in
 from .story import design_story_sequence
 from .trends import SourceDescriptor, TrendObservation, TrendProfile, score_trends
 from .visual import VisualSpec, render_rtl_html, screenshot_html
+from .visual import surface_spec
+from .contracts import read_json, write_json
+from .calendar_fa import calendar_days, write_ics
+from .production import guided_init, guided_compose, project_init, save_production, latest_production, export_production, production_prompt
+from .learning import bind_result, record_results, import_csv, read_results, compare_results
+from .evaluation import prepare_evaluation, score_evaluation
+from .subtitles import subtitle_pack
 
 
 def _load(path: str) -> Any:
@@ -141,7 +148,7 @@ def cmd_voice(args: argparse.Namespace) -> None:
 
 
 def cmd_visual(args: argparse.Namespace) -> None:
-    spec = VisualSpec()
+    spec = surface_spec(args.surface)
     html_path = render_rtl_html(args.headline, args.body, args.html, spec, args.background, args.kicker)
     result = {"html": str(html_path)}
     if args.png:
@@ -151,6 +158,70 @@ def cmd_visual(args: argparse.Namespace) -> None:
 
 def cmd_doctor(args: argparse.Namespace) -> None:
     _write(environment_report(), args.output)
+
+
+def cmd_workflow(args):
+    if args.action == "init":
+        result = project_init(args.project, read_json(args.input)) if args.input else guided_init(args.project)
+    elif args.action == "compose":
+        result = guided_compose(args.project)
+    elif args.action == "import":
+        if not args.input:
+            raise ValueError("--input لازم است")
+        result = save_production(args.project, read_json(args.input))
+    elif args.action == "prompt":
+        result = {"prompt": production_prompt(args.project), "response_schema": "schemas/production.schema.json"}
+    elif args.action == "export":
+        if not args.output_dir:
+            raise ValueError("--output-dir لازم است")
+        result = export_production(args.project, args.output_dir, png=args.png)
+    else:
+        result = read_json(Path(args.project) / "project.json")
+    _write(result, args.output)
+
+
+def cmd_calendar(args):
+    events = read_json(args.events) if args.events else []
+    rows = calendar_days(args.start, args.days, calendar=args.calendar, zone=args.timezone, time=args.time, events=events)
+    if args.ics:
+        write_ics(rows, args.ics)
+    _write({"days": rows, "auto_publish": False}, args.output)
+
+
+def cmd_subtitles(args):
+    payload = read_json(args.input)
+    pack = subtitle_pack(payload["cues"] if isinstance(payload, dict) else payload)
+    out = Path(args.output_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    for extension in ("srt", "vtt"):
+        (out / f"subtitles.{extension}").write_text(pack[extension], encoding="utf-8")
+    _write({"warnings": pack["warnings"], "directory": str(out)}, args.output)
+
+
+def cmd_results(args):
+    if args.action in {"record", "import-csv"} and not args.input:
+        raise ValueError("--input لازم است")
+    if args.action == "record":
+        payload = read_json(args.input)
+        row = bind_result(args.project, payload) if args.project else payload
+        result = record_results(args.database, [row])
+    elif args.action == "import-csv":
+        result = import_csv(args.database, args.input)
+    else:
+        result = compare_results(read_results(args.database), metric=args.metric)
+    _write(result, args.output)
+
+
+def cmd_evaluate(args):
+    if args.action == "prepare":
+        if not args.output_dir:
+            raise ValueError("--output-dir لازم است")
+        result = prepare_evaluation(read_json(args.input), args.output_dir, seed=args.seed)
+    else:
+        if not args.ratings:
+            raise ValueError("--ratings لازم است")
+        result = score_evaluation(read_json(args.input), read_json(args.ratings))
+    _write(result, args.output)
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -229,13 +300,66 @@ def build_parser() -> argparse.ArgumentParser:
     visual.add_argument("--html", required=True)
     visual.add_argument("--png")
     visual.add_argument("--output")
+    visual.add_argument("--surface", choices=("story", "reel", "carousel", "cover"), default="story")
     visual.set_defaults(func=cmd_visual)
+
+    workflow = sub.add_parser("workflow", help="گردش‌کار فارسی از زمینه تا خروجی نسخه‌دار")
+    workflow.add_argument("action", choices=("init", "compose", "import", "prompt", "export", "status"))
+    workflow.add_argument("--project", required=True)
+    workflow.add_argument("--input")
+    workflow.add_argument("--output-dir")
+    workflow.add_argument("--png", action="store_true")
+    workflow.add_argument("--output")
+    workflow.set_defaults(func=cmd_workflow)
+
+    calendar = sub.add_parser("calendar", help="تقویم شمسی و خروجی ICS")
+    calendar.add_argument("--start", required=True)
+    calendar.add_argument("--days", type=int, default=7)
+    calendar.add_argument("--calendar", choices=("jalali", "gregorian"), default="jalali")
+    calendar.add_argument("--timezone", default="Asia/Tehran")
+    calendar.add_argument("--time", default="18:00")
+    calendar.add_argument("--events")
+    calendar.add_argument("--ics")
+    calendar.add_argument("--output")
+    calendar.set_defaults(func=cmd_calendar)
+
+    subtitles = sub.add_parser("subtitles", help="خروجی SRT و VTT فارسی")
+    subtitles.add_argument("--input", required=True)
+    subtitles.add_argument("--output-dir", required=True)
+    subtitles.add_argument("--output")
+    subtitles.set_defaults(func=cmd_subtitles)
+
+    results = sub.add_parser("results", help="ثبت آمار و مقایسه انتشارهای همسان")
+    results.add_argument("action", choices=("record", "import-csv", "compare"))
+    results.add_argument("--database", required=True)
+    results.add_argument("--project")
+    results.add_argument("--input")
+    results.add_argument("--metric", choices=("share_per_reach", "save_per_reach", "reply_per_reach"), default="share_per_reach")
+    results.add_argument("--output")
+    results.set_defaults(func=cmd_results)
+
+    evaluate = sub.add_parser("evaluate", help="ارزیابی کور کیفیت محتوا")
+    evaluate.add_argument("action", choices=("prepare", "score"))
+    evaluate.add_argument("--input", required=True)
+    evaluate.add_argument("--ratings")
+    evaluate.add_argument("--output-dir")
+    evaluate.add_argument("--seed", type=int, default=0)
+    evaluate.add_argument("--output")
+    evaluate.set_defaults(func=cmd_evaluate)
     return parser
 
 
 def main() -> None:
-    args = build_parser().parse_args()
-    args.func(args)
+    if hasattr(sys.stdout, "reconfigure"):
+        sys.stdout.reconfigure(encoding="utf-8")
+    if hasattr(sys.stdin, "reconfigure"):
+        sys.stdin.reconfigure(encoding="utf-8")
+    parser = build_parser()
+    args = parser.parse_args()
+    try:
+        args.func(args)
+    except (ValueError, KeyError, OSError, RuntimeError) as exc:
+        parser.exit(2, f"خطا: {exc}\n")
 
 
 if __name__ == "__main__":

@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import sys
 from typing import Any
+from pathlib import Path
 
 
 def _module(name: str) -> bool:
@@ -44,6 +45,8 @@ def environment_report() -> dict[str, Any]:
             "pillow": "PIL",
             "playwright": "playwright",
             "openai": "openai",
+            "jdatetime": "jdatetime",
+            "tzdata": "tzdata",
         }.items()
     }
     languages = _tesseract_languages()
@@ -62,6 +65,11 @@ def environment_report() -> dict[str, Any]:
             "reel_partial_pipeline": executables["ffprobe"]["available"],
             "persian_ocr": "fas" in languages,
             "rtl_html_layout": core_ready,
+            "bundled_persian_font": (Path(__file__).parent / "assets/Vazirmatn-Regular.woff2").is_file(),
+            "jalali_calendar": modules["jdatetime"],
+            "versioned_production": core_ready,
+            "publication_ledger": core_ready,
+            "human_evaluation": core_ready,
             "png_rendering": modules["playwright"],
             "openai_image_generation": modules["openai"] and bool(os.getenv("OPENAI_API_KEY")),
         },

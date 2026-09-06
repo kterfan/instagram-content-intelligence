@@ -32,4 +32,12 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 
 ## Output
 
+For authored Persian frame exports, use the `workflow` commands and contract in
+`${PLUGIN_ROOT}/docs/persian-workflow.md` and `${PLUGIN_ROOT}/schemas/production.schema.json`.
+Choose surface `story`; declare a continuation for every non-final frame and finish
+with `role=payoff`. The validator checks structure, so separately verify that the
+final copy actually answers the opening promise. Carousel production uses the same
+contract with `surface=carousel` and its own aspect ratio. Do not present the
+English `story-plan` skeleton as finished Persian copy.
+
 Return the frame table, continuation logic, interaction rationale, measurement fields, likely friction points, and A/B or switchback experiment.

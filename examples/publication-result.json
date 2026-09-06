@@ -1,0 +1,7 @@
+{
+  "media_id": "synthetic-media-001", "variant": "specific-output", "experiment_id": "practice-hooks-01",
+  "traffic": "organic", "source_kind": "manual_import", "source_ref": "synthetic fixture; not real account insights",
+  "published_at": "2026-09-01T18:00:00+03:30", "observed_at": "2026-09-02T18:00:00+03:30",
+  "window_hours": 24, "reviewed": true, "uncertain_fields": [],
+  "reach": 1000, "shares": 12, "saved": 45, "likes": 50, "comments": 3, "replies": null, "views": 1400
+}

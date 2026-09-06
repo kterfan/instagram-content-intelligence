@@ -1,0 +1,14 @@
+{
+  "account": "synthetic-learning-studio",
+  "audience": "فارسی‌زبانانی که می‌خواهند تمرین کوتاه و قابل‌اجرا داشته باشند",
+  "language": "fa",
+  "region": "IR",
+  "timezone": "Asia/Tehran",
+  "topic": "یک تمرین، یک نتیجه مشخص",
+  "objective": "save_per_reach",
+  "promise": "یک تمرین کوتاه را به نتیجه‌ای قابل بررسی تبدیل کن.",
+  "voice": "روشن، دعوتی و محاوره‌ای؛ بدون وعده تضمینی",
+  "surface": "reel",
+  "evidence": [],
+  "voice_dna": null
+}

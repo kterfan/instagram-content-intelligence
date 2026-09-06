@@ -22,6 +22,12 @@ Resolve `PLUGIN_ROOT` before opening templates: in Claude Code use `${CLAUDE_PLU
 
 ## Quality gate
 
+For a local Persian production project, use `workflow init --project <private-folder>`
+through the resolved runner. Ask language, audience region and timezone separately;
+never infer Iran from Persian. Reuse current answers with `--input` when known.
+Read `${PLUGIN_ROOT}/docs/persian-workflow.md` for project persistence and the
+Jalali calendar command. Load sourced occasions only when relevant to this account.
+
 - The profile must work without mentioning a specific public figure, industry, or account.
 - Every factual or performance claim has provenance.
 - Missing facts remain explicit gaps.
