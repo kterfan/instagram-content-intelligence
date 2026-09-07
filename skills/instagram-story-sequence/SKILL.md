@@ -32,6 +32,12 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 
 ## Output
 
+For visual art direction, read the adjacent
+`${PLUGIN_ROOT}/skills/instagram-visual-generator/references/art-direction.md`.
+Plan rhythm and continuity internally. Do not create a contact sheet or side-by-side
+sequence preview. When the user supplies approved copy and asks only for design,
+preserve that copy rather than running the writing workflow or adding a CTA.
+
 For authored Persian frame exports, use the `workflow` commands and contract in
 `${PLUGIN_ROOT}/docs/persian-workflow.md` and `${PLUGIN_ROOT}/schemas/production.schema.json`.
 Choose surface `story`; declare a continuation for every non-final frame and finish

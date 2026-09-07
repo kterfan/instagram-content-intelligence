@@ -1,15 +1,30 @@
 ---
 name: instagram-visual-generator
-description: Generate Instagram visual assets internally through a provider adapter, then render exact Persian/RTL copy deterministically and run layout QA. Use for Story frames, covers, carousel panels, visual concepts, or image generation.
+description: Art-direct Persian Instagram Stories with account-specific typography, semantic composition, photography and restrained accents. Deliver production prompts or rendered assets, preserving exact copy and reviewing sequence consistency internally without a contact sheet.
 ---
 
 # Instagram Visual Generator
 
 Use image models for art direction and deterministic rendering for exact text.
 
+## Story art direction
+
+For Story design, read [references/art-direction.md](references/art-direction.md)
+before choosing composition. This is the primary design workflow. Interpret the
+whole sequence internally; do not create or show a side-by-side preview, contact
+sheet or candidate gallery. Deliver only the selected individual final prompts or
+slides in the user's requested mode. A prompt-only request must not invoke image
+tools or require a rendering dependency check.
+
+Use [references/design-contract.md](references/design-contract.md) when compiling
+or validating a model-authored plan. The helper checks exact copy and geometric
+constraints; it does not choose the design or claim a visual test passed.
+Keep brand profiles and licensed font assets private and portable across accounts.
+Never downgrade a requested exact font to the bundled renderer's font silently.
+
 ## Runtime and graceful degradation
 
-Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"`; no package installation is required. Run `doctor` first. If an image provider is unavailable, produce the exact RTL HTML layout with a declared missing background. If Playwright/Chromium is unavailable, return HTML instead of PNG and report the missing rendering capability. Never claim an image or PNG was generated when its stage did not run.
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"`; no package installation is required. For rendering, run `doctor` first. If an image provider is unavailable, return a production prompt or an explicitly limited HTML layout when it satisfies the requested font. If Playwright/Chromium is unavailable, return HTML instead of PNG and report the missing rendering capability. Never claim an image or PNG was generated when its stage did not run.
 
 ## Workflow
 

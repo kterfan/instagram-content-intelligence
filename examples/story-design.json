@@ -1,0 +1,14 @@
+{
+  "profile": {"font_family": "Vazirmatn", "weights": ["Regular"]},
+  "output_size": [1080, 1920],
+  "slides": [{
+    "copy": "قرار نیست همه‌چیز را امروز حل کنی.\nفقط قدم بعدی را پیدا کن.",
+    "composition": "Typography-only editorial poster. Keep the upper field open. Align both text blocks on a shared right edge; the second block is the sole semantic anchor. No portrait, extra text or decorative footer.",
+    "background": "Solid #FFFFFF, no texture or gradient.",
+    "reserved_areas": [[90, 1420, 900, 160]],
+    "text_blocks": [
+      {"text": "قرار نیست همه‌چیز را امروز حل کنی.", "box": [90, 650, 900, 180], "size": 44, "weight": "Regular", "color": "#30343B", "align": "right"},
+      {"text": "فقط قدم بعدی را پیدا کن.", "box": [90, 880, 900, 220], "size": 68, "weight": "Regular", "color": "#174A63", "align": "right", "emphasis": "Let the larger scale and ink color carry emphasis; add no underline or marker."}
+    ]
+  }]
+}
