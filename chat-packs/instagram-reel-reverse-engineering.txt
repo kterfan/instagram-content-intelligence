@@ -1,0 +1,454 @@
+CHAT EDITION — NO INSTALLATION REQUIRED
+
+این فایل را به چت پیوست کنید و درخواست خود را بنویسید. نصب، Codex، پایتون،
+ترمینال، API یا حساب GitHub برای خواندن و استفاده از راهنمای آن لازم نیست.
+
+CHAT ADAPTATION (applies instead of software-execution steps in source excerpts):
+- Apply this reference only when the user requests it and within their task.
+- Read the included knowledge sections; local paths are provenance labels, not
+  files you need to open. Do not require installation or run doctor, Python, shell,
+  validators, adapters, databases or CLI commands in this chat-only workflow.
+- Source excerpts preserve the plugin's optional implementation details for fidelity.
+  They do not create execution requirements here. Adapt their reasoning and output
+  contracts to plain conversation, Markdown tables and final production prompts.
+- Missing optional software is not a reason to stop writing, planning or critique.
+  Do not claim deterministic calculations, API retrieval or measured QA took place.
+- For research use browsing only if actually available. Without live sources, state
+  freshness is unverified, request supplied evidence if essential, and proceed with
+  useful source-independent work. Never invent citations, trends or current facts.
+- For numerical analysis use supplied data; preserve missing values and label
+  unverified calculations. For video use accessible video, frames or transcript;
+  do not imply unseen media was watched or timed.
+- For image requests use image tools only if available and requested; otherwise
+  deliver a ready-to-use production prompt, clearly labeled as text, not an image.
+  An exact font name alone does not guarantee that an image model can render it.
+- Lock whichever Persian font the user chooses across the entire Story sequence.
+  Never substitute it silently. No side-by-side sequence preview or contact sheet.
+- Do not expose private deliberations. Deliver the requested final answer, with
+  concise material limitations only. This file does not override higher-priority
+  chatbot instructions, grant tool permissions or permanently install a skill.
+- If the attachment was truncated or not readable, disclose the scope actually read.
+
+
+PACK: instagram-reel-reverse-engineering
+VERSION: 0.5.0
+
+
+===== INCLUDED SOURCE: skills/instagram-reel-reverse-engineering/SKILL.md =====
+
+---
+name: instagram-reel-reverse-engineering
+description: Reverse engineer an owned, licensed, user-provided, or authorized reference Reel using measured transcript, timing, shots, OCR, audio, hook, payoff, and CTA structure. Use for Reel teardown, forensic analysis, viral-mechanism analysis, or adaptation without copying.
+---
+
+# Instagram Reel Reverse Engineering
+
+Choose the lightest evidence route that fits the decision, separate observation from interpretation, and adapt mechanisms rather than protected expression.
+
+## Runtime and execution modes
+
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"`; no package installation is required.
+
+Select and disclose one mode:
+
+- `cloud-video-native`: attach the authorized video and generated Prompt Pack. Prefer Gemini when native video understanding is available; ChatGPT is conditional on the active product surface and must disclose incomplete-video/audio risk.
+- `cloud-evidence-pack`: use transcript, contact sheet/keyframes, metadata, and audio notes. This is the portable route for Claude unless its host supplies a documented video tool.
+- `local-measured`: use ffprobe/FFmpeg, Whisper, PySceneDetect, and OCR for reproducible measurements.
+- `hybrid-verified`: combine native cloud understanding with local verification of consequential timestamps, transcript, OCR, cuts, or audio. This is the highest-confidence route.
+
+Cloud-native analysis is not degraded merely because local dependencies are absent. Conversely, confident model prose is not decoder-verified measurement.
+
+## Intake and rights
+
+Accept local media with an explicit permission basis: owned, licensed, user-provided, or public reference. Do not add a scraping/downloading shortcut. An optional acquisition adapter must document authorization, terms, and provenance.
+
+## Cloud Prompt Pack
+
+1. Prepare an account/task context using `${PLUGIN_ROOT}/examples/reel-cloud-context.json`; include Voice DNA, Matrix candidate, and Insights only when available.
+2. Run `python "${PLUGIN_ROOT}/scripts/ici.py" reel prompt-pack --input <context.json> --provider gemini --output-dir <folder>`.
+3. Attach the generated prompt and schema beside the authorized video or evidence pack in the selected model.
+4. Save the returned JSON and run `python "${PLUGIN_ROOT}/scripts/ici.py" reel audit --input <response.json> --manifest <folder/reel-analysis-manifest.json>`.
+5. Reject or re-run results with incomplete coverage, broken timestamps, ungrounded interpretation, missing alternatives, or undisclosed uncertainty.
+6. When timestamped retention/skip data exists, run `reel align-retention`; describe aligned events as correlation, not causation.
+7. To compare providers or multiple analyses, pass a JSON object with `reports` to `reel compare`.
+
+## Optional local and hybrid verification
+
+1. Run `doctor`, then create the local audit manifest.
+2. When dependencies exist, run `reel pipeline`; its non-strict mode records unavailable stages and continues.
+3. Verify only consequential or disputed moments when the cloud result is otherwise sufficient.
+4. Run `reel hybrid-verify --input <cloud-response.json> --measured <measured_features.json>` to compare the first speech/overlay anchors; disclose all disagreements.
+5. Never infer transcript, OCR, shot, or audio events for a local stage that did not run.
+
+## Quality gate
+
+- Transcript, shot, and OCR confidence or failure is visible.
+- Every timestamp claim traces to measured data.
+- Cloud reports declare provider, mode, inspected coverage, audio interpretation, limitations, and uncertainties.
+- Observation IDs ground interpretations and reusable mechanisms; at least two alternative explanations accompany each interpretation.
+- Performance claims use Insights data if available; content structure alone cannot prove causality.
+- Adaptation returns close, moderate, and structurally different concepts plus a validation experiment.
+
+
+
+===== INCLUDED SOURCE: docs/metrics-catalog.md =====
+
+# Instagram metrics catalog and provenance rules
+
+This catalog reflects official sources accessed during the 2026-08-29 research pass. Re-check current Meta documentation before changing an API contract.
+
+## Reel media API
+
+The current media-insights reference documents Reel metrics including comments, crossposted/Facebook views, likes, reach, reposts, saves, shares, views, average watch time, total video watch time, and skip rate. Several are estimated and/or in development. Media data can be delayed and retention differs from Story data.
+
+The current media reference does not document Reel-level `profile_activity`, `profile_visits`, or `follows`. Instagram's Help Center does describe Reel follows in the UI. Therefore a Reel follow/profile field must retain Dashboard/manual provenance unless Meta's API contract changes.
+
+## Story media API
+
+Story navigation breakdown distinguishes Next Story (`SWIPE_FORWARD`), Back (`TAP_BACK`), Exit (`TAP_EXIT`), and Forward (`TAP_FORWARD`). Story data is time-sensitive, small values can be unavailable, and UI/API/webhook values can differ. Collect before expiration and retain the route.
+
+## Account breakdown
+
+Account-level reach/views can expose follower/non-follower and media-product breakdowns. This is an account-interval distribution, not automatic attribution to a specific Reel.
+
+## Derived ratios
+
+- `share_per_reach = shares / reach`
+- `save_per_reach = saves / reach`
+- `interaction_per_reach = (likes + comments + saves + shares) / reach`
+- Story frame-drop proxy = `(previous frame reach - current frame reach) / previous frame reach`
+- Profile conversion must name the chosen numerator and denominator. Dashboard-attributed follows/reach and account profile-visits/reach are different constructs.
+
+Zero denominators return unavailable, not zero performance. Derived ratios are not native Instagram metrics.
+
+
+
+
+===== INCLUDED SOURCE: docs/research-sources.md =====
+
+# Research sources
+
+Primary or original sources were preferred. Practitioner frameworks are identified as such.
+
+| Area | Source | Key use | Limitation |
+|---|---|---|---|
+| Insights overview | [Meta Instagram Platform Insights](https://developers.facebook.com/docs/instagram-platform/insights/) | permissions, endpoints, availability | login variant and access level differ |
+| Media metrics | [Meta Instagram Media Insights](https://developers.facebook.com/docs/instagram-platform/reference/instagram-media/insights) | Reel/Story metrics, breakdowns, delay, retention | several fields estimated/in development |
+| Native video understanding | [Gemini API video understanding](https://ai.google.dev/gemini-api/docs/video-understanding) | Direct video/audio prompting, timestamps, sampling behavior | default sampling can miss rapid events |
+| Gemini app uploads | [Gemini Apps file upload help](https://support.google.com/gemini/answer/14903178) | Product upload types and account/plan limits | limits vary by plan and availability |
+| ChatGPT video attachment | [OpenAI ChatGPT image inputs FAQ](https://help.openai.com/en/articles/8400551) | Product-level video attachment and explicit completeness caveat | may not inspect whole video/audio |
+| Claude visual inputs | [Anthropic vision](https://docs.anthropic.com/en/docs/build-with-claude/vision) | Documented image route used by evidence packs | no general native-video contract documented in reviewed guide |
+| Account metrics | [Meta Instagram Account Insights](https://developers.facebook.com/docs/instagram-platform/api-reference/instagram-user/insights) | follower/media-product breakdowns | account interval is not per-media attribution; naming inconsistency must be validated live |
+| Reel Dashboard | [Instagram Help: Reel insights](https://www.facebook.com/help/instagram/202865988324236) | UI views, watch time, viewers, follows | Dashboard surface is not an API contract |
+| Account Dashboard | [Instagram Help: account/content insights](https://www.facebook.com/help/instagram/1533933820244654) | 90-day web range and public-account requirements | visible fields can vary by account type |
+| Hashtags | [IG Hashtag Search](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag-search) and [IG Hashtag](https://developers.facebook.com/docs/instagram-platform/instagram-graph-api/reference/ig-hashtag/) | authorized recent/top discovery | 30 unique hashtag searches per seven days |
+| Ranking | [Instagram Ranking Explained](https://about.instagram.com/blog/announcements/instagram-ranking-explained) | surface-specific ranking descriptions | published explanation, not full/current ranking code |
+| Experiments | [Trial Reels](https://about.fb.com/news/2024/12/trial-reels-try-content-non-followers-first-see-what-perfoms-best/) | non-follower-first test surface | product behavior, not causal guarantee |
+| Search trends | [Google Trends FAQ](https://support.google.com/trends/answer/4365533) | normalization and sampling semantics | not absolute volume or a poll |
+| Trend method | [Kleinberg, Bursty and Hierarchical Structure in Streams](https://www.cs.cornell.edu/home/kleinber/bhs.pdf) | burst-detection foundation | requires adaptation to heterogeneous sources |
+| Matrix | [Chaffey, Content Marketing Matrix](https://www.smartinsights.com/content-management/content-marketing-strategy/the-content-marketing-matrix-new-infographic/) | content/audience mapping | practitioner framework |
+| Intent | [Kaushik, See-Think-Do-Care](https://www.kaushik.net/avinash/see-think-do-content-marketing-measurement-business-framework/) | intent and measurement alignment | practitioner framework; journeys need not be linear |
+| Diversity | [Carbonell & Goldstein, MMR](https://dl.acm.org/doi/10.1145/290941.291025) | relevance-diversity reranking | similarity and lambda require calibration |
+| Scholarly source | [Crossref REST API](https://www.crossref.org/documentation/retrieve-metadata/rest-api/) | searchable publication metadata | completeness/copyright differ by field |
+| Biomedical source | [NCBI APIs](https://www.ncbi.nlm.nih.gov/home/develop/api/) | PubMed/PMC discovery | category-specific; usage rules apply |
+| Community source | [Reddit developer guidelines](https://developers.reddit.com/docs/guidelines) | authorized community adapter boundary | terms, representativeness, and rate limits |
+| Transcription | [OpenAI Whisper](https://github.com/openai/whisper) | multilingual ASR and timestamps | accuracy varies by language/audio; ffmpeg required |
+| Shot detection | [PySceneDetect](https://github.com/Breakthrough/PySceneDetect) | cut/transition detection | thresholds require fixture calibration |
+| Persian OCR | [Tesseract tessdata_best Persian](https://github.com/tesseract-ocr/tessdata_best/blob/main/fas.traineddata) | on-screen Persian text | stylized/animated text can reduce accuracy |
+| Persian font | [Vazirmatn](https://github.com/rastikerdar/vazirmatn) | redistributable RTL typography | verify renderer and fallback fonts |
+| Image API | [OpenAI image generation guide](https://developers.openai.com/api/docs/guides/image-generation) | generation/edit provider adapter | model availability, cost, and access evolve |
+| Codex skills | [OpenAI Build skills](https://developers.openai.com/codex/build-skills) | plugin/skill packaging | host dependencies must be explicit |
+
+
+
+===== INCLUDED SOURCE: docs/persian-workflow.md =====
+
+# گردش‌کار فارسی از ایده تا نتیجه — 0.3.0
+
+این نسخه یک گردش‌کار محلی برای تولید، بازبینی و یادگیری است. متن اصیل را صاحب
+حساب یا Skill میزبان می‌نویسد؛ ابزار Python قرارداد، نسخه، خروجی و آمار را
+مدیریت می‌کند. خروجی مدل همیشه پیش‌نویس است و هیچ انتشار خودکاری انجام نمی‌شود.
+
+## شروع ساده، بدون ویرایش JSON
+
+از ریشه Plugin اجرا کنید؛ اگر جای دیگری هستید مسیر کامل `scripts/ici.py` را بدهید.
+داده شخصی را در پوشه خصوصی خودتان نگه دارید.
+
+```powershell
+python scripts/ici.py workflow init --project private/my-account
+python scripts/ici.py workflow compose --project private/my-account
+python scripts/ici.py workflow export --project private/my-account --output-dir outputs/my-account
+python scripts/ici.py workflow status --project private/my-account
+```
+
+`init` درباره حساب، مخاطب، زبان، کشور، منطقه زمانی، موضوع، هدف، وعده، لحن و
+قالب سؤال می‌کند. زبان فارسی کشور مخاطب را تعیین نمی‌کند. `compose` متن هر
+بخش، تصویر، صدا، دلیل ادامه و مبنای ادعا را می‌گیرد. اگر ادعا به منبع بیرونی
+وابسته باشد، منبع و شاهد را هم می‌پرسد. برای Reel، گفتار و مدت هر بخش لازم است.
+
+برای کار با دستیار، پس از init از `workflow prompt` استفاده کنید. پاسخ دستیار
+باید با `schemas/production.schema.json` سازگار باشد؛ سپس آن را وارد کنید:
+
+```powershell
+python scripts/ici.py workflow prompt --project private/my-account --output private/prompt.json
+python scripts/ici.py workflow import --project private/my-account --input private/production.json
+```
+
+نسخه‌ها با hash زمینه و متن ذخیره می‌شوند. تغییر کپشن یا زمینه، نسخه تازه
+می‌سازد؛ تاریخچه قبلی پاک نمی‌شود. `status` امکان ادامه پروژه قبلی را می‌دهد.
+فریم نهایی باید نقش `payoff` داشته باشد؛ ابزار وجود ساختار را می‌سنجد، اما
+درستی معنایی پاسخ وعده و صحت منبع همچنان نیازمند بررسی صاحب محتواست.
+
+## خروجی تولید
+
+هر خروجی زیر پوشه نسخه خود قرار می‌گیرد و شامل این موارد است:
+
+- `production.json` و `production.md`: متن و زمینه نسخه‌دار، فرضیه و شاخص‌ها.
+- `shot-list.csv`: شات، صدا، گفتار و زمان؛ سلول‌های فرمول‌مانند بی‌اثر می‌شوند.
+- `caption.txt`: کپشن و CTA.
+- `frame-*.html` و `cover.html`: قالب RTL مستقل با فونت محلی Vazirmatn.
+- برای Reel: فایل‌های UTF-8 با پسوند SRT و VTT و هشدار بار خواندن زیرنویس.
+
+Story و Reel با بوم ۱۰۸۰×۱۹۲۰، Carousel و Cover با بوم ۱۰۸۰×۱۳۵۰ ساخته می‌شوند.
+این ابعاد و safe area انتخاب طراحی‌اند؛ ادعای انطباق دائمی با UI اینستاگرام ندارند.
+فونت از v33.003 پروژه Vazirmatn و با مجوز OFL همراه بسته است؛ رندر به اینترنت
+یا فونت نصب‌شده روی دستگاه متکی نیست. PNG به Playwright و Chromium نیاز دارد:
+
+```powershell
+python -m pip install -e ".[visual]"
+python -m playwright install chromium
+python scripts/ici.py workflow export --project private/my-account --output-dir outputs/my-account --png
+```
+
+رندر قبل از ساخت PNG بارگذاری فونت و سرریز را بررسی می‌کند. متن بلند حذف یا
+خلاصه نمی‌شود؛ خطا می‌دهد تا متن یا چیدمان اصلاح شود. زمان‌بندی زیرنویس داده
+ورودی است و هم‌ترازی اندازه‌گیری‌شده با صدای واقعی محسوب نمی‌شود. حدود پیش‌فرض
+۳۲ نویسه، دو خط و ۲۰ نویسه در ثانیه، معیارهای قابل‌تنظیم طراحی‌اند.
+
+## تقویم شمسی و مناسبت‌ها
+
+```powershell
+python -m pip install -e ".[calendar]"
+python scripts/ici.py calendar --start ۱۴۰۵-۰۹-۲۸ --days 7 --timezone Asia/Tehran --time 18:00 --events config/iran-occasions.json --ics outputs/calendar.ics --output outputs/calendar.json
+```
+
+تبدیل تاریخ با `jdatetime` انجام می‌شود. تاریخ شمسی و میلادی، منطقه زمانی، ساعت
+محلی و UTC در خروجی می‌مانند. ICS زمان پیشنهادی تولید/انتشار را وارد تقویم
+می‌کند؛ اتصال یا ارسال به Google Calendar در کار نیست. ساعت‌های مبهم یا ناموجود
+ناشی از DST رد می‌شوند. اگر timezone database روی ویندوز موجود نباشد، `tzdata`
+از گروه calendar آن را فراهم می‌کند؛ UTC بدون آن هم قابل استفاده است.
+
+رجیستری اولیه شامل **دو مناسبت فرهنگی** نوروز و یلدا با منبع و تاریخ بررسی
+است؛ تقویم رسمی کامل تعطیلات نیست. نوروز اول فروردین با مناسبت ثابت ۲۱ مارس
+سازمان ملل یکی فرض نمی‌شود. مناسبت‌های قمری یا رویدادهای متغیر را با تاریخ
+دقیق، تقویم ورودی، منبع و وضعیت `verified` یا `needs_review` وارد کنید. منبعی
+که در زمان برنامه‌ریزی بیش از ۳۶۵ روز از بررسی‌اش گذشته باشد برای بازبینی علامت
+می‌خورد. تناسب مناسبت با برند باید جدا بررسی شود.
+
+## ثبت نتایج و بازخورد به انتخاب محتوا
+
+```powershell
+python scripts/ici.py results record --database private/results.sqlite --project private/my-account --input private/result.json
+python scripts/ici.py results import-csv --database private/results.sqlite --input private/results.csv
+python scripts/ici.py results compare --database private/results.sqlite --metric save_per_reach --output outputs/comparison.json
+```
+
+قرارداد `schemas/publication-result.schema.json` و نمونه
+`examples/publication-result.json` را ببینید. `--project` شناسه حساب، محتوا، نسخه،
+قالب و هدف را از پروژه می‌گیرد؛ برای انتشار نسخه قدیمی، hash همان نسخه را در
+`revision` بدهید. snapshotها بر اساس حساب، media_id، بازه و منبع یکتا هستند.
+ورود دوباره همان داده بی‌اثر است؛ داده متناقض رد می‌شود. واردکردن یک batch در
+SQLite تراکنشی است و خطا کل batch را برمی‌گرداند.
+
+فیلد `reviewed=true` برای بازبینی انسانی ورودی لازم است. داده دستی، API و
+Dashboard جدا می‌مانند. اسکرین‌شات می‌تواند توسط میزبان خوانده شود، اما مقدار
+نامطمئن تا بازبینی وارد تحلیل نمی‌شود؛ این نسخه موتور OCR اختصاصی جدید ندارد.
+ارقام فارسی، ممیز `٫` و جداکننده هزارگان `٬` پذیرفته می‌شوند. مقادیر خالی null
+می‌مانند. بازه گزارش باید با زمان انتشار و مشاهده هم‌خوان باشد.
+
+مقایسه در گروه‌های همسان حساب، قالب، هدف، بازه، نوع ترافیک، منبع و آزمایش انجام
+می‌شود. حد پیش‌فرض پنج انتشار برای هر variant است، نه تضمین کفایت آماری.
+خروجی میانه و بازه bootstrap تفاوت میانه‌ها را گزارش می‌کند. داده همبستگی است؛
+نسبت‌دادن نتیجه به تغییر سناریو نیازمند طراحی آزمایش دارد.
+
+در گروه با داده کافی، `advisory_historical_priors` رتبه نسبی میانه‌ها در همان
+گروه را بین صفر و یک می‌دهد. این عدد احتمال موفقیت نیست. Skill ماتریس می‌تواند
+با ثبت گروه مرجع و پس از بررسی تناسب، آن را در `scores.historical_prior`
+کاندید مرتبط به کار ببرد؛ وزن‌های اصلی یا نسخه پروفایل خودکار تغییر نمی‌کنند.
+
+## ارزیابی واقعی کیفیت فارسی
+
+```powershell
+python scripts/ici.py evaluate prepare --input examples/quality-candidates.json --output-dir private/evaluation --seed 42
+python scripts/ici.py evaluate score --input private/evaluation/blind.json --ratings private/evaluation/ratings-completed.json --output outputs/quality-report.json
+```
+
+بستهٔ ارزیابی و کلید پاسخ در دو فایل جدا هستند. فقط `blind.json` را به ارزیاب
+بدهید؛ کلید را قبل از امتیازدهی نبیند. طبیعی‌بودن فارسی، لحن، وضوح، قابلیت اجرا
+و پشتوانه ادعا هر کدام ۱ تا ۵ و همراه دلیل سنجیده می‌شوند. قالب ratings حاوی
+null است؛ داده ناقص هرگز قبولی محسوب نمی‌شود. شناسه ارزیابی جلوی قاطی‌شدن
+امتیازها میان دو چینش متفاوت را می‌گیرد.
+
+شش نمونه اولیه در سه حوزه آموزش، فروشگاه و طراحی **مصنوعی و برای راه‌اندازی
+روش** هستند؛ نتیجه ارزیابی انسانی یا معیار عمومی بازار محسوب نمی‌شوند.
+برای سنجش واقعی، نمونه‌های مجاز حساب و یک مجموعه جدا از داده توسعه فراهم
+کنید. کیفیت متن و عملکرد اینستاگرام دو گزارش جدا هستند؛ این نسخه هیچ بهبود
+بازدید یا رتبه انسانی ساختگی گزارش نمی‌کند.
+
+## اجرای نمونه کامل و آزمون
+
+```powershell
+python scripts/ici.py workflow init --project private/demo --input examples/persian-brief.json
+python scripts/ici.py workflow import --project private/demo --input examples/persian-production.json
+python scripts/ici.py workflow export --project private/demo --output-dir outputs/demo --png
+python scripts/ici.py results record --project private/demo --database private/demo.sqlite --input examples/publication-result.json
+python -m unittest discover -s tests -t . -v
+```
+
+برای تست تصویری `ICI_VISUAL_TESTS=1` بگذارید. CI دو مسیر دارد: هسته بدون
+وابستگی‌های اختیاری و مسیر کامل تقویم/مرورگر/Schema. بسته wheel هم مستقل از
+ریپو نصب و بارگذاری فونتش بررسی می‌شود. `doctor` قابلیت‌های حاضر را گزارش می‌کند.
+
+
+
+===== INCLUDED SOURCE: schemas/provenance.schema.json =====
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/provenance.schema.json",
+  "title": "Metric provenance",
+  "type": "object",
+  "required": ["kind", "source", "collected_at"],
+  "properties": {
+    "kind": {"enum": ["meta_api", "instagram_dashboard", "manual_import", "public_source", "derived", "model_inference"]},
+    "source": {"type": "string", "minLength": 1},
+    "collected_at": {"type": "string", "format": "date-time"},
+    "api_version": {"type": ["string", "null"]},
+    "scope": {"type": ["string", "null"]},
+    "estimated": {"type": "boolean"},
+    "in_development": {"type": "boolean"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
+
+
+
+
+===== INCLUDED SOURCE: schemas/reel-analysis-response.schema.json =====
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/reel-analysis-response.schema.json",
+  "title": "Instagram Reel Analysis Response",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "metadata",
+    "observations",
+    "interpretations",
+    "mechanisms",
+    "adaptations",
+    "uncertainties"
+  ],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "metadata": {
+      "type": "object",
+      "required": ["provider", "mode", "video_duration_seconds", "audio_interpreted", "coverage"],
+      "properties": {
+        "provider": {"type": "string"},
+        "model_or_surface": {"type": ["string", "null"]},
+        "mode": {
+          "enum": ["cloud-video-native", "cloud-evidence-pack", "local-measured", "hybrid-verified"]
+        },
+        "video_duration_seconds": {"type": "number", "exclusiveMinimum": 0},
+        "audio_interpreted": {"type": "boolean"},
+        "coverage": {
+          "type": "object",
+          "required": ["start_seconds", "end_seconds"],
+          "properties": {
+            "start_seconds": {"type": "number", "minimum": 0},
+            "end_seconds": {"type": "number", "minimum": 0}
+          }
+        },
+        "limitations": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "observations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "start_seconds", "end_seconds", "kind", "evidence", "confidence"],
+        "properties": {
+          "id": {"type": "string"},
+          "start_seconds": {"type": "number", "minimum": 0},
+          "end_seconds": {"type": "number", "minimum": 0},
+          "kind": {"enum": ["speech", "overlay", "visual", "edit", "audio", "performance", "other"]},
+          "evidence": {"type": "string"},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+        }
+      }
+    },
+    "interpretations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["claim", "evidence_ids", "confidence", "alternative_explanations"],
+        "properties": {
+          "claim": {"type": "string"},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+          "alternative_explanations": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+          "requires_insights": {"type": "boolean"}
+        }
+      }
+    },
+    "mechanisms": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "evidence_ids", "reusable_principle", "must_change"],
+        "properties": {
+          "name": {"type": "string"},
+          "evidence_ids": {"type": "array", "items": {"type": "string"}},
+          "reusable_principle": {"type": "string"},
+          "must_change": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "adaptations": {"type": "array", "minItems": 3, "items": {"type": "object"}},
+    "uncertainties": {"type": "array", "items": {"type": "string"}}
+  }
+}
+
+
+
+===== INCLUDED SOURCE: schemas/reel-cloud-context.schema.json =====
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/reel-cloud-context.schema.json",
+  "title": "Cloud Reel Analysis Context",
+  "type": "object",
+  "required": ["permission_basis", "objective", "language"],
+  "properties": {
+    "permission_basis": {
+      "enum": ["owned", "licensed", "user_provided", "public_reference"]
+    },
+    "media": {"type": ["string", "null"]},
+    "objective": {"type": "string", "minLength": 1},
+    "language": {"type": "string", "minLength": 2},
+    "region": {"type": ["string", "null"]},
+    "audience_job": {"type": ["string", "null"]},
+    "account_profile": {"type": "object"},
+    "brand_voice": {"type": "object"},
+    "matrix_candidate": {"type": "object"},
+    "insights": {"type": "object"},
+    "adaptation_distance": {
+      "enum": ["close-structure", "moderate", "distant", "all-three"]
+    }
+  },
+  "additionalProperties": true
+}
+

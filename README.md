@@ -6,7 +6,13 @@ See [راهنمای طراحی استوری](docs/story-art-direction-fa.md) for
 
 An evidence-backed, general-purpose Instagram system for strategy, trend research, Insights analytics, Story retention, cloud/local Reel reverse engineering, validated Brand Voice, visual generation, and reproducible experimentation.
 
-It is a Codex plugin **and** a deterministic Python toolkit. It is not a collection of prompts. LinkedIn and YouTube are intentionally out of scope.
+Use it in two ways: upload a [ready-made chat pack](chat-packs/README.md) to a chatbot
+with **no installation or Python required**, or install the Codex/Claude plugin and
+optionally use the deterministic Python toolkit. LinkedIn and YouTube are out of scope.
+
+**بدون نصب:** [فایل‌های آمادهٔ پیوست به چت](chat-packs/README.md) شامل خود مهارت و
+راهنماهای مرتبط هستند. برای شروع استوری از
+[بستهٔ سناریو و طراحی](chat-packs/story-writing-and-design.txt) استفاده کنید.
 
 ## What makes it different
 

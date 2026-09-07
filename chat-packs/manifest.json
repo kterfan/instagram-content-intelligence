@@ -1,0 +1,148 @@
+{
+  "version": "0.5.0",
+  "packs": {
+    "instagram-account-foundation": {
+      "sources": {
+        "skills/instagram-account-foundation/SKILL.md": "6ff9f2b24af755df664decde887a07ea4c1dec9822b16ba5c9b67da3e8b1b21c",
+        "docs/persian-analysis.md": "bb3093bbe364b84946629f26530c3951e238d451a29acd6e05f62592dc4c8c98",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/brand-voice-dna.schema.json": "ec309519bfd52f66af2d1a3b4d93f6496ab559248fc4ec9161b1b5f3118fb66e"
+      },
+      "sha256": "282a433a0191a14915e9d75c31a91398f8b1129399fdaf990894567781885eae",
+      "characters": 17505
+    },
+    "instagram-brand-voice": {
+      "sources": {
+        "skills/instagram-brand-voice/SKILL.md": "af4e36fb0c3761e1b97887e564d9474393798dda36645ea05a59a8c15c494366",
+        "skills/instagram-brand-voice/references/interview-and-validation.md": "19a2bbc171b8cddc71a7b36758bbe4219775989cfe3dbbf370bc84a0eae2b35a",
+        "docs/persian-analysis.md": "bb3093bbe364b84946629f26530c3951e238d451a29acd6e05f62592dc4c8c98",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/brand-voice-dna.schema.json": "ec309519bfd52f66af2d1a3b4d93f6496ab559248fc4ec9161b1b5f3118fb66e"
+      },
+      "sha256": "ad179dff18b6042c32179c56882cdb79a6185dd603e8a1e3d9bad2437bb78194",
+      "characters": 19620
+    },
+    "instagram-content-matrix": {
+      "sources": {
+        "skills/instagram-content-matrix/SKILL.md": "9f15599e5fe3f2c7d002c752cc5ac1adf9e44de495243fe9cb688890ec98e18b",
+        "docs/content-matrix.md": "2013159fd0c9027f13e82f285d0490ac7bbb87d37751984a8c2d1fadcba0c98a",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37"
+      },
+      "sha256": "968ac8205d7a713ac72ec551f1c59a17783ee2451f5ea11eae9451b2fff90277",
+      "characters": 14933
+    },
+    "instagram-experiment-lab": {
+      "sources": {
+        "skills/instagram-experiment-lab/SKILL.md": "5a138a16c0896837f93790f9e6939efe769cc42adcb6e541dc019cbf223898c9",
+        "docs/metrics-catalog.md": "334fb2c46ade63e6c3c90467f3842f973ad5ebd25f8cd3ca061d36bfad28a89c",
+        "docs/research-sources.md": "046d180625cdbd80e6230796a5c0a774509adcae5b70bb41ef159aaa3f11f2cd",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/publication-result.schema.json": "59b59649240dc32cb4a7d1ffeda6a796fd4fe84c35bd261ce028bfc1a2d77c18"
+      },
+      "sha256": "13e7f875f134f461793969795d04f4ceecf169c3c6d336472c9e64099e589acd",
+      "characters": 23328
+    },
+    "instagram-insights-analyst": {
+      "sources": {
+        "skills/instagram-insights-analyst/SKILL.md": "44a55629c7c80c66d7b1ebe6bf369fc333e9de460dccf7243474d60519636deb",
+        "docs/metrics-catalog.md": "334fb2c46ade63e6c3c90467f3842f973ad5ebd25f8cd3ca061d36bfad28a89c",
+        "docs/persian-analysis.md": "bb3093bbe364b84946629f26530c3951e238d451a29acd6e05f62592dc4c8c98",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/publication-result.schema.json": "59b59649240dc32cb4a7d1ffeda6a796fd4fe84c35bd261ce028bfc1a2d77c18"
+      },
+      "sha256": "b10a64c719ed86f790329238a731b03db81f78d8abd64cbd44b962c6573f57f0",
+      "characters": 20749
+    },
+    "instagram-reel-reverse-engineering": {
+      "sources": {
+        "skills/instagram-reel-reverse-engineering/SKILL.md": "630cc3964398aa556730da51998887d393caa7808d349f111eb8c578555bdd56",
+        "docs/metrics-catalog.md": "334fb2c46ade63e6c3c90467f3842f973ad5ebd25f8cd3ca061d36bfad28a89c",
+        "docs/research-sources.md": "046d180625cdbd80e6230796a5c0a774509adcae5b70bb41ef159aaa3f11f2cd",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/reel-analysis-response.schema.json": "e0e86c2374f4a40ad39b46a52591bfc8c25c612628a0a8c865be1cc0a9189559",
+        "schemas/reel-cloud-context.schema.json": "3126491354db9b348f340a3ee34155e7da10b10e2178d3a1f94ecbdbbf5a0aac"
+      },
+      "sha256": "3c5e37b8cecb633bab6f82f9c7e989d63f590c38096edd383db2f30a30a0f70d",
+      "characters": 26564
+    },
+    "instagram-reel-script": {
+      "sources": {
+        "skills/instagram-reel-script/SKILL.md": "82fac22e9dc33b78a4275148e811bcf6e897f0b6b1e08d00d89e57e303f58c4c",
+        "docs/content-matrix.md": "2013159fd0c9027f13e82f285d0490ac7bbb87d37751984a8c2d1fadcba0c98a",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/production.schema.json": "f623b35c27ac522e58478e5698a47be3711b58e382022c7bad5644294a302242"
+      },
+      "sha256": "65934a68a8bdd2e97852f1bf7709ce21d2ed510c9a04e71986ae8877455535d9",
+      "characters": 17836
+    },
+    "instagram-story-sequence": {
+      "sources": {
+        "skills/instagram-story-sequence/SKILL.md": "1a7d41e13d534c398977c347bbdc44a3df4536f11f83616dc5991ecefef9349f",
+        "skills/instagram-story-sequence/references/scenario-to-production.md": "bf8f6532f636783a10effafebbafcfe5751cbbbc07636761dc9084dc07441f10",
+        "skills/instagram-story-sequence/references/sources-and-ranking.md": "e22a5048d144a060fbe540db4097b6bb3d734e27c4bfa8b82011e89e4c55f834",
+        "docs/metrics-catalog.md": "334fb2c46ade63e6c3c90467f3842f973ad5ebd25f8cd3ca061d36bfad28a89c",
+        "docs/story-art-direction-fa.md": "53cecd80153d09425d3173eb8b0857b41c9c6f79ce481f633c9fd32ec8ed7d49",
+        "skills/instagram-visual-generator/references/art-direction.md": "721aa8cdd1ce2549ae904cdc3dc8144e3a9466708be9df41012ee1afc55bfc75",
+        "skills/instagram-visual-generator/references/design-contract.md": "332ec712cc6a9319f9b4e33babe4addd31c895478d92e7124b197b3133a43bd4",
+        "skills/instagram-visual-generator/references/layout-quality.md": "d26dde090a4962d90612acd8a2b1a9a709ca21a4bb99c64bd6c68e916b68ba55",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/production.schema.json": "f623b35c27ac522e58478e5698a47be3711b58e382022c7bad5644294a302242"
+      },
+      "sha256": "935241aa8d4daa79f30dd5e7b2d319a536f2ebb494c89d8485d69713efea05d2",
+      "characters": 51611
+    },
+    "instagram-trend-intelligence": {
+      "sources": {
+        "skills/instagram-trend-intelligence/SKILL.md": "7efcc2110425db7849f7ad31f15d3c1362c6c7cc693adeb6447956871909b8e3",
+        "skills/instagram-trend-intelligence/references/persian-trend-lifecycle.md": "2f4e6ef7893bd81565c7276975dfac14b2760f94654497f365ea2aa5ae8b7a1b",
+        "docs/trend-intelligence.md": "93298abc07e9a5c037c67c7efe5b2da4e1b75b14fdae6e9b39a26fef085b1179",
+        "docs/persian-analysis.md": "bb3093bbe364b84946629f26530c3951e238d451a29acd6e05f62592dc4c8c98",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/trend-input.schema.json": "ad2dfa1a920b440e110ee65f5302bc8ca58a68f2989a720f87ac75d1effad40d"
+      },
+      "sha256": "5a56ca114975925944218e819370973c0bcced4281d617371d22278511a7a7a7",
+      "characters": 26358
+    },
+    "instagram-visual-generator": {
+      "sources": {
+        "skills/instagram-visual-generator/SKILL.md": "c6e8297aac767d277e14f0782dbfc8a7e437f008a66e4f3e7a5c76dc33c744e3",
+        "skills/instagram-visual-generator/references/art-direction.md": "721aa8cdd1ce2549ae904cdc3dc8144e3a9466708be9df41012ee1afc55bfc75",
+        "skills/instagram-visual-generator/references/design-contract.md": "332ec712cc6a9319f9b4e33babe4addd31c895478d92e7124b197b3133a43bd4",
+        "skills/instagram-visual-generator/references/layout-quality.md": "d26dde090a4962d90612acd8a2b1a9a709ca21a4bb99c64bd6c68e916b68ba55",
+        "docs/story-art-direction-fa.md": "53cecd80153d09425d3173eb8b0857b41c9c6f79ce481f633c9fd32ec8ed7d49",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/production.schema.json": "f623b35c27ac522e58478e5698a47be3711b58e382022c7bad5644294a302242"
+      },
+      "sha256": "5c863ab7ae5d5f66088dd12a1f38412bcde42be99877bc85597d59fd742c9940",
+      "characters": 41056
+    },
+    "story-writing-and-design": {
+      "sources": {
+        "skills/instagram-story-sequence/SKILL.md": "1a7d41e13d534c398977c347bbdc44a3df4536f11f83616dc5991ecefef9349f",
+        "skills/instagram-story-sequence/references/scenario-to-production.md": "bf8f6532f636783a10effafebbafcfe5751cbbbc07636761dc9084dc07441f10",
+        "skills/instagram-story-sequence/references/sources-and-ranking.md": "e22a5048d144a060fbe540db4097b6bb3d734e27c4bfa8b82011e89e4c55f834",
+        "docs/metrics-catalog.md": "334fb2c46ade63e6c3c90467f3842f973ad5ebd25f8cd3ca061d36bfad28a89c",
+        "docs/story-art-direction-fa.md": "53cecd80153d09425d3173eb8b0857b41c9c6f79ce481f633c9fd32ec8ed7d49",
+        "skills/instagram-visual-generator/references/art-direction.md": "721aa8cdd1ce2549ae904cdc3dc8144e3a9466708be9df41012ee1afc55bfc75",
+        "skills/instagram-visual-generator/references/design-contract.md": "332ec712cc6a9319f9b4e33babe4addd31c895478d92e7124b197b3133a43bd4",
+        "skills/instagram-visual-generator/references/layout-quality.md": "d26dde090a4962d90612acd8a2b1a9a709ca21a4bb99c64bd6c68e916b68ba55",
+        "docs/persian-workflow.md": "17b4f108cf619cd967354b47543afba91684589bb19cd621319afda5076ad01c",
+        "schemas/provenance.schema.json": "2cb189a0d9f01000dc36b8b74ec3aaeb0d7cfdbde4da36b794a3120c1fcb3d37",
+        "schemas/production.schema.json": "f623b35c27ac522e58478e5698a47be3711b58e382022c7bad5644294a302242",
+        "skills/instagram-visual-generator/SKILL.md": "c6e8297aac767d277e14f0782dbfc8a7e437f008a66e4f3e7a5c76dc33c744e3"
+      },
+      "sha256": "1af6a25aabd756d63f18558fed8e6f5b439b042fead8b32f1127339402605048",
+      "characters": 57587
+    }
+  }
+}

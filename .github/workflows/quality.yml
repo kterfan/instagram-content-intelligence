@@ -19,6 +19,7 @@ jobs:
       - run: python -m unittest discover -s tests -t . -v
       - run: python benchmarks/run_benchmarks.py
       - run: python scripts/validate_repository.py
+      - run: python scripts/build_chat_packs.py --check
 
   persian-workflow:
     runs-on: ubuntu-latest

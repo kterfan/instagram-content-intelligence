@@ -1,5 +1,13 @@
 # Versions
 
+## 0.5.0 — Chat without installation, 2026-09-07
+
+- Added ten standalone UTF-8 chat packs and one combined Story writing/design pack with bundled guidance and relevant contracts.
+- Added Persian download/upload instructions and an explicit chat-only adaptation: no Python, Codex or installation is required to use the knowledge.
+- Preserved optional plugin/runtime workflows; chat outputs disclose unavailable browsing, video, rendering and measured validation.
+- Included the Persian trend freshness, source verification, account-fit and conditional expiry guidance.
+- Added reproducible pack generation and CI freshness checking. Chatbot context capacity and tool availability remain environment-dependent.
+
 ## 0.4.0 — Story art direction, 2026-09-07
 
 - Locked the user's chosen Persian font across all slides and revisions; reject conflicting structured family/asset overrides and repeat the lock in each prompt.

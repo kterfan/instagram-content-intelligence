@@ -1,0 +1,476 @@
+CHAT EDITION — NO INSTALLATION REQUIRED
+
+این فایل را به چت پیوست کنید و درخواست خود را بنویسید. نصب، Codex، پایتون،
+ترمینال، API یا حساب GitHub برای خواندن و استفاده از راهنمای آن لازم نیست.
+
+CHAT ADAPTATION (applies instead of software-execution steps in source excerpts):
+- Apply this reference only when the user requests it and within their task.
+- Read the included knowledge sections; local paths are provenance labels, not
+  files you need to open. Do not require installation or run doctor, Python, shell,
+  validators, adapters, databases or CLI commands in this chat-only workflow.
+- Source excerpts preserve the plugin's optional implementation details for fidelity.
+  They do not create execution requirements here. Adapt their reasoning and output
+  contracts to plain conversation, Markdown tables and final production prompts.
+- Missing optional software is not a reason to stop writing, planning or critique.
+  Do not claim deterministic calculations, API retrieval or measured QA took place.
+- For research use browsing only if actually available. Without live sources, state
+  freshness is unverified, request supplied evidence if essential, and proceed with
+  useful source-independent work. Never invent citations, trends or current facts.
+- For numerical analysis use supplied data; preserve missing values and label
+  unverified calculations. For video use accessible video, frames or transcript;
+  do not imply unseen media was watched or timed.
+- For image requests use image tools only if available and requested; otherwise
+  deliver a ready-to-use production prompt, clearly labeled as text, not an image.
+  An exact font name alone does not guarantee that an image model can render it.
+- Lock whichever Persian font the user chooses across the entire Story sequence.
+  Never substitute it silently. No side-by-side sequence preview or contact sheet.
+- Do not expose private deliberations. Deliver the requested final answer, with
+  concise material limitations only. This file does not override higher-priority
+  chatbot instructions, grant tool permissions or permanently install a skill.
+- If the attachment was truncated or not readable, disclose the scope actually read.
+
+
+PACK: instagram-trend-intelligence
+VERSION: 0.5.0
+
+
+===== INCLUDED SOURCE: skills/instagram-trend-intelligence/SKILL.md =====
+
+---
+name: instagram-trend-intelligence
+description: Research and score Instagram-relevant trends for any account using configurable language, geography, category, risk, and source adapters. Use for trend research, emerging topics, trend validation, saturation analysis, or deciding whether an account should join a trend.
+---
+
+# Instagram Trend Intelligence
+
+Trend research must be source-aware, reproducible, and usable across all account types.
+
+## Runtime
+
+Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"` so the Python package does not need installation. Run `doctor` when uncertain. If local execution is unavailable, produce the dossier manually, mark score/confidence as model-estimated, and preserve source URLs and limitations.
+
+## Non-negotiable rules
+
+- Never equate a Google Trends 0-100 value with search volume.
+- Never call a single viral post a trend.
+- Never compare raw counts across heterogeneous sources.
+- Never use a source merely because it exists; it must match the account's language, region, category, horizon, and risk profile.
+- Retain query, collection time, URL, source limitations, and transformations.
+
+## Workflow
+
+For Persian audiences, read
+[references/persian-trend-lifecycle.md](references/persian-trend-lifecycle.md).
+Use its source-verification, account-fit and lifecycle gates before recommending
+participation. Fresh news alone is not evidence of an Instagram trend. Expiration
+is a conditional editorial hypothesis, not a guaranteed platform deadline.
+
+1. Load the account profile and `${PLUGIN_ROOT}/config/source-registry.json`.
+2. Build a query set from audience vocabulary, adjacent problems, category entities, cultural moments, competitors, and exclusions.
+3. Select applicable sources. Core choices include authorized Instagram hashtag results, official Google Trends exports, curated RSS/Atom feeds, and manual observations. Enable scholarly or community adapters only when relevant and authorized.
+4. Collect at least one historical comparison window. Mark missing baselines as insufficient evidence.
+5. Convert each source to the normalized observation contract. For official CSV and snapshot helpers use `instagram_content_intelligence.adapters`.
+6. Score velocity, acceleration, recency, source convergence, relevance, and evidence quality; penalize saturation and risk:
+
+   `python "${PLUGIN_ROOT}/scripts/ici.py" trends <input.json> --output <ranked.json>`
+
+7. Report score and confidence separately. A high score with low confidence is a test candidate, not a recommendation.
+8. Translate accepted trends into original account-relevant angles; do not copy a creator's wording, edit, or identity.
+
+## Output
+
+For every candidate provide: topic, why-now evidence with dates and original URLs,
+independent source count, confidence, audience relevance with a concrete account
+use case, saturation, risk, lifecycle stage, recheck_at with timezone, expiration
+conditions, publish/test/watch/skip decision, original angles and a validation
+experiment. Missing freshness or account-fit evidence means watch/test, not a
+confident recommendation. See `${PLUGIN_ROOT}/docs/trend-intelligence.md`.
+
+
+
+===== INCLUDED SOURCE: skills/instagram-trend-intelligence/references/persian-trend-lifecycle.md =====
+
+# Persian sources, account fit and trend lifecycle
+
+This is a research and decision procedure for the host model, not an automatic
+collector, scheduled monitor or new calibrated scoring model. Reviewed 2026-09-07.
+
+## Discover in the audience's language
+
+Resolve language, country/city or diaspora, category, audience job and publication
+horizon. Persian language does not imply residence in Iran. Build query variants
+using Persian/Arabic Yeh and Kaf, ZWNJ/space, transliteration, colloquial terms and
+relevant hashtags. Preserve original source wording in evidence; normalization is
+for discovery and deduplication only. Exclude unrelated homonyms explicitly.
+
+## Select sources by their job
+
+| Evidence job | Where to look | What it cannot prove |
+|---|---|---|
+| Verify an event, product or deadline | Original organizer, official institution, product announcement or original creator | An announcement alone does not prove audience interest |
+| Persian reporting and discovery | Relevant desks of ISNA (https://www.isna.ir/) and IRNA (https://www.irna.ir/), plus category publishers with named authors and original sourcing | A publisher's name does not certify every claim or neutrality; syndicated reports are not independent corroboration |
+| Technology/culture/category detail | Find the original product, festival, publisher or specialist report behind the Persian article | A translated report does not establish a local trend |
+| Search demand | Official Google Trends export, matched geography/query/window | Search interest is not Instagram reach or absolute volume |
+| Native adoption | Authorized Instagram observations from multiple distinct relevant creators over time | One viral post, hashtag count or copied format is insufficient |
+| Actual audience relevance | Authorized account Insights, recurring questions and reviewed audience feedback | One account is not representative of all Persian speakers |
+
+Publisher homepages are discovery seeds, not citations for specific claims. Open
+the exact article; record author, original evidence, event date, publication date,
+updated date if present and collection time with timezone. Check editorial origin,
+commercial incentive, corrections and subject expertise. Verify disputed claims
+against independent original sources; official status identifies provenance, not
+universal truth. Never invent RSS endpoints, access permissions or collection results.
+If a page is inaccessible, mark it unverified and use an accessible primary source.
+Do not describe this seed list as exhaustive or permanently vetted.
+
+News recirculation can make an old event look new. Separate event time from article
+time and from the time the topic gained attention. Search snippets, crawl dates and
+'updated today' labels do not prove a new event. If the date is missing, state unknown.
+Deduplicate by original report/event and content lineage, not just domain or URL.
+
+Google's data guidance: https://support.google.com/trends/answer/4365533?hl=en
+and https://newsinitiative.withgoogle.com/resources/trainings/fundamentals/google-trends-understanding-the-data/.
+Use matched exports and comparison windows; normalized indices are relative, not
+absolute counts. Low or missing data is not proof of zero interest. Do not compare
+independently normalized exports as if they share one raw scale.
+
+## Account-fit gate
+
+Answer concretely: which audience problem does this serve, why would this account
+credibly discuss it, what original value can it add, can the format be produced
+before the moment passes, and does the tone fit the audience's circumstances?
+Keep relevance separate from popularity. A very popular but unrelated topic is
+skip, not publish. Sensitive news needs relevance and factual care; do not turn
+harm or tragedy into a decorative engagement hook.
+
+Publish only with sufficient fresh evidence, a credible account angle and feasible
+timing. Use test for plausible fit with weak adoption evidence, watch for unresolved
+facts/timing and skip for irrelevance, stale premise or unacceptable factual risk.
+Do not disguise these judgments as calibrated probabilities or automatic scores.
+
+## Lifecycle and expiry
+
+Classify emerging, growing, crowded, declining, event-ended, evergreen or unknown.
+Support direction using comparable observation windows. Without a baseline use
+unknown/newly observed; never infer acceleration from one snapshot.
+
+Specify recheck_at (ISO timestamp with timezone), production lead time and explicit
+expiry conditions. Suggested recheck intervals below are editable editorial
+defaults, not measurements of a trend's half-life or scheduled tasks:
+
+| Topic type | Starting recheck interval | Typical invalidation condition |
+|---|---|---|
+| Fast news/live event | 2–6 hours, and immediately before publication | Correction, new event phase, outdated claim |
+| Native meme/audio/format | 12–24 hours | Comparable adoption declines, audience mismatch, saturation removes original value |
+| Product/launch | 24–72 hours or before publication | Offer/version/availability changes |
+| Cultural/calendar moment | Before production and publication | Relevant local event window ends or date changes |
+| Durable audience problem | 7–30 days | Supporting facts change; relevance persists independently of the spike |
+
+If production completion is later than the useful window, skip the reactive angle
+or propose an explicitly evergreen treatment. Expired evidence does not imply the
+underlying topic is worthless. Do not invent a precise expires_at without an actual
+deadline; use conditional expiry. Never create monitoring automation unless requested.
+
+## Compact dossier and handoff
+
+Include topic and locale, original URLs and timestamps, independent origins,
+baseline/current window, lifecycle evidence, fit rationale, saturation uncertainty,
+decision, recheck_at, expiry conditions and one original angle. Distinguish observed
+facts from interpretation. Send accepted angles plus evidence to Content Matrix
+or Story/Reel writing; do not transfer an expired claim as approved copy.
+
+## Behavioral checks (not claimed completed human evaluations)
+
+- Five sites republish one announcement: count one origin, not five confirmations.
+- Old Persian article reposted today: retain the old event date and inspect why-now.
+- Global English trend for a local Persian account: require local audience fit.
+- Large search spike but no native evidence: label search-interest candidate.
+- Event ends before assets are ready: skip reactive timing or choose evergreen value.
+- No baseline: unknown trajectory, no invented velocity or expiration date.
+- Relevant topic after a correction: revise the claim before producing content.
+
+
+
+===== INCLUDED SOURCE: docs/trend-intelligence.md =====
+
+# General Trend Intelligence specification
+
+## Definition
+
+A trend candidate is a topic, format, behavior, sound, visual grammar, or audience question showing time-bounded change in one or more applicable sources. A single popular item is an observation, not sufficient proof of a trend.
+
+## Applicability before scoring
+
+Each source declares language, geography, categories, latency, evidence quality, authentication, terms, and limitations. The account profile selects the applicable subset. PubMed can be strong evidence for a health account and irrelevant for a fashion account; RSS quality depends on the configured publisher allowlist; community chatter is not population-representative.
+
+## Normalization
+
+Raw counts remain within their source. Each observation is converted to change relative to its own historical baseline, then robustly scaled within the evaluation batch. Google Trends exports preserve their 0–100 relative meaning and are never labeled volume.
+
+## Score and confidence
+
+Score combines velocity, acceleration, recency, source convergence, account relevance, and evidence quality, then subtracts saturation and risk above the account tolerance. Confidence combines source convergence, evidence quality, and repeated observations. Weights are normalized and versioned.
+
+High score + low confidence means **test quickly**. High confidence + low relevance means **do not chase it**. High relevance + high saturation requires a differentiated angle.
+
+## Required dossier
+
+Every recommended trend includes query, sources, observation times, transformations, source count, score, confidence, saturation, risk, audience relevance, expiry hypothesis, original angles, and a validation test.
+
+
+
+
+===== INCLUDED SOURCE: docs/persian-analysis.md =====
+
+# Persian analysis and missing-data semantics
+
+## فارسی
+
+کلید مقایسه فارسی برای تحقیق ترند و ارزیابی لحن مشترک است: ی/ک عربی و فارسی،
+ارقام فارسی/عربی/لاتین و فاصله/نیم‌فاصله را یکدست می‌کند. متن اصلی برای نمایش
+و شواهد حفظ می‌شود. اعراب و نشانه‌گذاری حذف نمی‌شوند و شکل چسبیده واژه‌ها حدس
+زده نمی‌شود. این ابزار، مترجم یا اصلاح‌گر متن نهایی نیست.
+
+زبان و کشور هر مشاهده باید با پروفایل سازگار باشد. `*` به معنی نامعلوم است؛
+این مشاهده‌ها برای سازگاری با ورودی‌های قبلی پذیرفته می‌شوند، اما تعدادشان در
+`unknown_locale_observation_count` نمایش داده می‌شود. برای پژوهش محدود به
+داده با زبان و کشور مشخص، در `profile` ورودی ترند این گزینه را قرار دهید:
+
+```json
+"allow_unknown_locale": false
+```
+
+زبان `fa` به‌تنهایی کشور `IR` را اثبات نمی‌کند. اطلاعات منبع عمومی هم جای
+زبان و کشور خود مشاهده را نمی‌گیرد.
+
+پاسخ عددی مصاحبه لحن می‌تواند مثل `۰٫۷` نوشته شود. مقدار نامعتبر، خارج از
+بازه صفر تا یک یا نامتناهی، شکاف ورودی محسوب می‌شود. عبارت‌های ترجیحی را
+می‌توان با ویرگول فارسی جدا کرد. کنترل عبارت ممنوع، معادل‌های فارسی را
+می‌شناسد و «کار» را داخل «کاربرد» تطبیق نمی‌دهد.
+
+## Compatibility and interpretation
+
+- Exact repeated trend measurements are deduplicated before scaling and scoring.
+  Identity includes normalized topic, source, timestamp, measurements, locale,
+  categories and evidence URL. Equivalent timezone representations compare equal.
+  Measurements at different times or from different sources remain distinct.
+  This is not semantic deduplication or a model of publisher independence.
+- `confidence_kind` explicitly marks trend confidence as a heuristic, not a
+  calibrated probability. Unknown locale counts are disclosed, not automatically
+  discounted by an invented numeric penalty.
+- `interaction_per_reach` is unavailable unless shares, saves, likes and comments
+  are all supplied. `interaction_coverage` distinguishes missing, partial and
+  complete inputs. Complete all-zero counts still yield zero when reach is positive.
+  Consumers must handle `null`; it no longer means zero engagement.
+- Account follower/non-follower shares require both counts. A missing count must
+  not produce a misleading 100% share for the other group.
+- Voice numeric dimensions accept only finite values in [0, 1]. Invalid answers
+  are asked again and keep DNA in draft status. Heuristic voice scores can change
+  because matching is normalized and respects word boundaries; re-score saved
+  candidates before comparing with new scores.
+- Original visual copy is untouched. These changes do not provide a Jalali
+  calendar, new content-generation model, or an automatic publication service.
+
+Regression coverage: `tests/test_persian_integrity.py`.
+
+
+
+===== INCLUDED SOURCE: docs/persian-workflow.md =====
+
+# گردش‌کار فارسی از ایده تا نتیجه — 0.3.0
+
+این نسخه یک گردش‌کار محلی برای تولید، بازبینی و یادگیری است. متن اصیل را صاحب
+حساب یا Skill میزبان می‌نویسد؛ ابزار Python قرارداد، نسخه، خروجی و آمار را
+مدیریت می‌کند. خروجی مدل همیشه پیش‌نویس است و هیچ انتشار خودکاری انجام نمی‌شود.
+
+## شروع ساده، بدون ویرایش JSON
+
+از ریشه Plugin اجرا کنید؛ اگر جای دیگری هستید مسیر کامل `scripts/ici.py` را بدهید.
+داده شخصی را در پوشه خصوصی خودتان نگه دارید.
+
+```powershell
+python scripts/ici.py workflow init --project private/my-account
+python scripts/ici.py workflow compose --project private/my-account
+python scripts/ici.py workflow export --project private/my-account --output-dir outputs/my-account
+python scripts/ici.py workflow status --project private/my-account
+```
+
+`init` درباره حساب، مخاطب، زبان، کشور، منطقه زمانی، موضوع، هدف، وعده، لحن و
+قالب سؤال می‌کند. زبان فارسی کشور مخاطب را تعیین نمی‌کند. `compose` متن هر
+بخش، تصویر، صدا، دلیل ادامه و مبنای ادعا را می‌گیرد. اگر ادعا به منبع بیرونی
+وابسته باشد، منبع و شاهد را هم می‌پرسد. برای Reel، گفتار و مدت هر بخش لازم است.
+
+برای کار با دستیار، پس از init از `workflow prompt` استفاده کنید. پاسخ دستیار
+باید با `schemas/production.schema.json` سازگار باشد؛ سپس آن را وارد کنید:
+
+```powershell
+python scripts/ici.py workflow prompt --project private/my-account --output private/prompt.json
+python scripts/ici.py workflow import --project private/my-account --input private/production.json
+```
+
+نسخه‌ها با hash زمینه و متن ذخیره می‌شوند. تغییر کپشن یا زمینه، نسخه تازه
+می‌سازد؛ تاریخچه قبلی پاک نمی‌شود. `status` امکان ادامه پروژه قبلی را می‌دهد.
+فریم نهایی باید نقش `payoff` داشته باشد؛ ابزار وجود ساختار را می‌سنجد، اما
+درستی معنایی پاسخ وعده و صحت منبع همچنان نیازمند بررسی صاحب محتواست.
+
+## خروجی تولید
+
+هر خروجی زیر پوشه نسخه خود قرار می‌گیرد و شامل این موارد است:
+
+- `production.json` و `production.md`: متن و زمینه نسخه‌دار، فرضیه و شاخص‌ها.
+- `shot-list.csv`: شات، صدا، گفتار و زمان؛ سلول‌های فرمول‌مانند بی‌اثر می‌شوند.
+- `caption.txt`: کپشن و CTA.
+- `frame-*.html` و `cover.html`: قالب RTL مستقل با فونت محلی Vazirmatn.
+- برای Reel: فایل‌های UTF-8 با پسوند SRT و VTT و هشدار بار خواندن زیرنویس.
+
+Story و Reel با بوم ۱۰۸۰×۱۹۲۰، Carousel و Cover با بوم ۱۰۸۰×۱۳۵۰ ساخته می‌شوند.
+این ابعاد و safe area انتخاب طراحی‌اند؛ ادعای انطباق دائمی با UI اینستاگرام ندارند.
+فونت از v33.003 پروژه Vazirmatn و با مجوز OFL همراه بسته است؛ رندر به اینترنت
+یا فونت نصب‌شده روی دستگاه متکی نیست. PNG به Playwright و Chromium نیاز دارد:
+
+```powershell
+python -m pip install -e ".[visual]"
+python -m playwright install chromium
+python scripts/ici.py workflow export --project private/my-account --output-dir outputs/my-account --png
+```
+
+رندر قبل از ساخت PNG بارگذاری فونت و سرریز را بررسی می‌کند. متن بلند حذف یا
+خلاصه نمی‌شود؛ خطا می‌دهد تا متن یا چیدمان اصلاح شود. زمان‌بندی زیرنویس داده
+ورودی است و هم‌ترازی اندازه‌گیری‌شده با صدای واقعی محسوب نمی‌شود. حدود پیش‌فرض
+۳۲ نویسه، دو خط و ۲۰ نویسه در ثانیه، معیارهای قابل‌تنظیم طراحی‌اند.
+
+## تقویم شمسی و مناسبت‌ها
+
+```powershell
+python -m pip install -e ".[calendar]"
+python scripts/ici.py calendar --start ۱۴۰۵-۰۹-۲۸ --days 7 --timezone Asia/Tehran --time 18:00 --events config/iran-occasions.json --ics outputs/calendar.ics --output outputs/calendar.json
+```
+
+تبدیل تاریخ با `jdatetime` انجام می‌شود. تاریخ شمسی و میلادی، منطقه زمانی، ساعت
+محلی و UTC در خروجی می‌مانند. ICS زمان پیشنهادی تولید/انتشار را وارد تقویم
+می‌کند؛ اتصال یا ارسال به Google Calendar در کار نیست. ساعت‌های مبهم یا ناموجود
+ناشی از DST رد می‌شوند. اگر timezone database روی ویندوز موجود نباشد، `tzdata`
+از گروه calendar آن را فراهم می‌کند؛ UTC بدون آن هم قابل استفاده است.
+
+رجیستری اولیه شامل **دو مناسبت فرهنگی** نوروز و یلدا با منبع و تاریخ بررسی
+است؛ تقویم رسمی کامل تعطیلات نیست. نوروز اول فروردین با مناسبت ثابت ۲۱ مارس
+سازمان ملل یکی فرض نمی‌شود. مناسبت‌های قمری یا رویدادهای متغیر را با تاریخ
+دقیق، تقویم ورودی، منبع و وضعیت `verified` یا `needs_review` وارد کنید. منبعی
+که در زمان برنامه‌ریزی بیش از ۳۶۵ روز از بررسی‌اش گذشته باشد برای بازبینی علامت
+می‌خورد. تناسب مناسبت با برند باید جدا بررسی شود.
+
+## ثبت نتایج و بازخورد به انتخاب محتوا
+
+```powershell
+python scripts/ici.py results record --database private/results.sqlite --project private/my-account --input private/result.json
+python scripts/ici.py results import-csv --database private/results.sqlite --input private/results.csv
+python scripts/ici.py results compare --database private/results.sqlite --metric save_per_reach --output outputs/comparison.json
+```
+
+قرارداد `schemas/publication-result.schema.json` و نمونه
+`examples/publication-result.json` را ببینید. `--project` شناسه حساب، محتوا، نسخه،
+قالب و هدف را از پروژه می‌گیرد؛ برای انتشار نسخه قدیمی، hash همان نسخه را در
+`revision` بدهید. snapshotها بر اساس حساب، media_id، بازه و منبع یکتا هستند.
+ورود دوباره همان داده بی‌اثر است؛ داده متناقض رد می‌شود. واردکردن یک batch در
+SQLite تراکنشی است و خطا کل batch را برمی‌گرداند.
+
+فیلد `reviewed=true` برای بازبینی انسانی ورودی لازم است. داده دستی، API و
+Dashboard جدا می‌مانند. اسکرین‌شات می‌تواند توسط میزبان خوانده شود، اما مقدار
+نامطمئن تا بازبینی وارد تحلیل نمی‌شود؛ این نسخه موتور OCR اختصاصی جدید ندارد.
+ارقام فارسی، ممیز `٫` و جداکننده هزارگان `٬` پذیرفته می‌شوند. مقادیر خالی null
+می‌مانند. بازه گزارش باید با زمان انتشار و مشاهده هم‌خوان باشد.
+
+مقایسه در گروه‌های همسان حساب، قالب، هدف، بازه، نوع ترافیک، منبع و آزمایش انجام
+می‌شود. حد پیش‌فرض پنج انتشار برای هر variant است، نه تضمین کفایت آماری.
+خروجی میانه و بازه bootstrap تفاوت میانه‌ها را گزارش می‌کند. داده همبستگی است؛
+نسبت‌دادن نتیجه به تغییر سناریو نیازمند طراحی آزمایش دارد.
+
+در گروه با داده کافی، `advisory_historical_priors` رتبه نسبی میانه‌ها در همان
+گروه را بین صفر و یک می‌دهد. این عدد احتمال موفقیت نیست. Skill ماتریس می‌تواند
+با ثبت گروه مرجع و پس از بررسی تناسب، آن را در `scores.historical_prior`
+کاندید مرتبط به کار ببرد؛ وزن‌های اصلی یا نسخه پروفایل خودکار تغییر نمی‌کنند.
+
+## ارزیابی واقعی کیفیت فارسی
+
+```powershell
+python scripts/ici.py evaluate prepare --input examples/quality-candidates.json --output-dir private/evaluation --seed 42
+python scripts/ici.py evaluate score --input private/evaluation/blind.json --ratings private/evaluation/ratings-completed.json --output outputs/quality-report.json
+```
+
+بستهٔ ارزیابی و کلید پاسخ در دو فایل جدا هستند. فقط `blind.json` را به ارزیاب
+بدهید؛ کلید را قبل از امتیازدهی نبیند. طبیعی‌بودن فارسی، لحن، وضوح، قابلیت اجرا
+و پشتوانه ادعا هر کدام ۱ تا ۵ و همراه دلیل سنجیده می‌شوند. قالب ratings حاوی
+null است؛ داده ناقص هرگز قبولی محسوب نمی‌شود. شناسه ارزیابی جلوی قاطی‌شدن
+امتیازها میان دو چینش متفاوت را می‌گیرد.
+
+شش نمونه اولیه در سه حوزه آموزش، فروشگاه و طراحی **مصنوعی و برای راه‌اندازی
+روش** هستند؛ نتیجه ارزیابی انسانی یا معیار عمومی بازار محسوب نمی‌شوند.
+برای سنجش واقعی، نمونه‌های مجاز حساب و یک مجموعه جدا از داده توسعه فراهم
+کنید. کیفیت متن و عملکرد اینستاگرام دو گزارش جدا هستند؛ این نسخه هیچ بهبود
+بازدید یا رتبه انسانی ساختگی گزارش نمی‌کند.
+
+## اجرای نمونه کامل و آزمون
+
+```powershell
+python scripts/ici.py workflow init --project private/demo --input examples/persian-brief.json
+python scripts/ici.py workflow import --project private/demo --input examples/persian-production.json
+python scripts/ici.py workflow export --project private/demo --output-dir outputs/demo --png
+python scripts/ici.py results record --project private/demo --database private/demo.sqlite --input examples/publication-result.json
+python -m unittest discover -s tests -t . -v
+```
+
+برای تست تصویری `ICI_VISUAL_TESTS=1` بگذارید. CI دو مسیر دارد: هسته بدون
+وابستگی‌های اختیاری و مسیر کامل تقویم/مرورگر/Schema. بسته wheel هم مستقل از
+ریپو نصب و بارگذاری فونتش بررسی می‌شود. `doctor` قابلیت‌های حاضر را گزارش می‌کند.
+
+
+
+===== INCLUDED SOURCE: schemas/provenance.schema.json =====
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/kterfan/instagram-content-intelligence/schemas/provenance.schema.json",
+  "title": "Metric provenance",
+  "type": "object",
+  "required": ["kind", "source", "collected_at"],
+  "properties": {
+    "kind": {"enum": ["meta_api", "instagram_dashboard", "manual_import", "public_source", "derived", "model_inference"]},
+    "source": {"type": "string", "minLength": 1},
+    "collected_at": {"type": "string", "format": "date-time"},
+    "api_version": {"type": ["string", "null"]},
+    "scope": {"type": ["string", "null"]},
+    "estimated": {"type": "boolean"},
+    "in_development": {"type": "boolean"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}
+
+
+
+
+===== INCLUDED SOURCE: schemas/trend-input.schema.json =====
+
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Trend intelligence input",
+  "type": "object",
+  "required": ["profile", "sources", "observations"],
+  "properties": {
+    "profile": {
+      "type": "object",
+      "required": ["language", "region", "categories"],
+      "properties": {
+        "allow_unknown_locale": {
+          "type": "boolean",
+          "default": true,
+          "description": "Allow observations with unknown (*) language or region; output counts them explicitly. Set false for verified-locale-only research."
+        }
+      }
+    },
+    "sources": {"type": "array", "items": {"type": "object", "required": ["id", "source_type", "evidence_quality"]}},
+    "observations": {"type": "array", "items": {"type": "object", "required": ["topic", "source_id", "observed_at", "value", "baseline"]}}
+  }
+}
+
+
