@@ -21,6 +21,12 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 
 ## Workflow
 
+For Persian audiences, read
+[references/persian-trend-lifecycle.md](references/persian-trend-lifecycle.md).
+Use its source-verification, account-fit and lifecycle gates before recommending
+participation. Fresh news alone is not evidence of an Instagram trend. Expiration
+is a conditional editorial hypothesis, not a guaranteed platform deadline.
+
 1. Load the account profile and `${PLUGIN_ROOT}/config/source-registry.json`.
 2. Build a query set from audience vocabulary, adjacent problems, category entities, cultural moments, competitors, and exclusions.
 3. Select applicable sources. Core choices include authorized Instagram hashtag results, official Google Trends exports, curated RSS/Atom feeds, and manual observations. Enable scholarly or community adapters only when relevant and authorized.
@@ -35,4 +41,9 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 
 ## Output
 
-For every candidate provide: topic, why-now evidence, source count, confidence, audience relevance, saturation, risk, expiration hypothesis, original angles, and validation experiment. See `${PLUGIN_ROOT}/docs/trend-intelligence.md`.
+For every candidate provide: topic, why-now evidence with dates and original URLs,
+independent source count, confidence, audience relevance with a concrete account
+use case, saturation, risk, lifecycle stage, recheck_at with timezone, expiration
+conditions, publish/test/watch/skip decision, original angles and a validation
+experiment. Missing freshness or account-fit evidence means watch/test, not a
+confident recommendation. See `${PLUGIN_ROOT}/docs/trend-intelligence.md`.
