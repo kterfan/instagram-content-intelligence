@@ -26,14 +26,25 @@ Never downgrade a requested exact font to the bundled renderer's font silently.
 
 Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise resolve the plugin root two directories above this `SKILL.md`. Use `python "${PLUGIN_ROOT}/scripts/ici.py"`; no package installation is required. For rendering, run `doctor` first. If an image provider is unavailable, return a production prompt or an explicitly limited HTML layout when it satisfies the requested font. If Playwright/Chromium is unavailable, return HTML instead of PNG and report the missing rendering capability. Never claim an image or PNG was generated when its stage did not run.
 
+## Layout-first execution contract
+
+Read [references/layout-quality.md](references/layout-quality.md) for every Story
+image-production request. Plan the image around the approved text before generating
+artwork. Compare plausible layouts internally, then choose one. When tools support
+it, measure actual shaped text with the requested font and inspect the resulting
+image; mental judgment alone is not measured validation. Separate technical checks
+from artistic judgment. Repair the failing region or layer while preserving approved
+copy, identity and unaffected artwork. Never claim universal approval or perfection.
+Do not expose internal candidates or produce a side-by-side sequence preview.
+
 ## Workflow
 
 1. Load account visual tokens, surface, dimensions, safe zones, and accessibility constraints.
-2. Create a visual prompt that excludes text unless text is intentionally part of the scene.
-3. Generate the base visual with a configured provider. The built-in OpenAI adapter reads `OPENAI_API_KEY` and optional `OPENAI_IMAGE_MODEL`; never store keys in the repository.
-4. Render Persian/RTL headline, body, CTA, or poll placeholders in HTML using the deterministic renderer.
-5. Run Playwright screenshot QA. Reject horizontal, vertical, or safe-area overflow.
-6. Inspect contrast, text hierarchy, crop safety, spelling, logo/identity risks, and consistency across a sequence.
+2. Resolve text bounds, hierarchy, subject placement and reserved areas first; use these constraints in the artwork prompt. Exclude generated lettering unless explicitly part of the requested scene.
+3. Generate the base visual with a configured provider. The built-in OpenAI adapter reads `OPENAI_API_KEY` and optional `OPENAI_IMAGE_MODEL`; never store keys in the repository. Check that the generated scene actually preserves the planned text space.
+4. Use a compatible compositor and the actual requested font asset to shape approved copy. Measure line fit and preserve Persian joining. The bundled generic renderer is suitable only when its font and layout meet the request; do not silently substitute it for a custom design.
+5. Run available font/bounds checks, then inspect the actual individual image at phone display size for readability and artistic hierarchy. A structural plan check does not prove rendered quality.
+6. Correct specific failures locally and recheck affected properties. Deliver the chosen final result with material unresolved limitations; no candidate gallery or sequence preview.
 
 ## Commands
 
