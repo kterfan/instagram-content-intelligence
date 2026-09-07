@@ -1,5 +1,12 @@
 # Versions
 
+## Unreleased — Story art direction, 2026-09-07
+
+- Expanded the visual Skill with semantic composition selection, account-specific font profiles, Persian typography, photography and local revision guidance.
+- Sequence design stays internal: no contact sheet or side-by-side preview by default.
+- Added an optional model-authored design validator and prompt compiler, exact-copy and geometry regression tests, a synthetic example and Persian usage guide.
+- No new image renderer, commercial font assets or claim of measured aesthetic improvement is included.
+
 ## 0.3.0 — 2026-09-06
 
 - Added guided Persian project creation/composition, immutable content revisions, production contracts and exports for Reel, Story and Carousel.

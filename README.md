@@ -1,5 +1,9 @@
 # Instagram Content Intelligence
 
+Story art direction now supports internal sequence planning, semantic composition,
+private font profiles and concise production prompts without a contact sheet.
+See [راهنمای طراحی استوری](docs/story-art-direction-fa.md) for usage and execution limits.
+
 An evidence-backed, general-purpose Instagram system for strategy, trend research, Insights analytics, Story retention, cloud/local Reel reverse engineering, validated Brand Voice, visual generation, and reproducible experimentation.
 
 It is a Codex plugin **and** a deterministic Python toolkit. It is not a collection of prompts. LinkedIn and YouTube are intentionally out of scope.
