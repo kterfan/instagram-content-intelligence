@@ -9,6 +9,20 @@ Use image models for art direction and deterministic rendering for exact text.
 
 ## Story art direction
 
+**Sequence-wide Persian font lock:** resolve one family and exact asset/package
+from the user's profile before designing the first slide. Carry that same lock to
+every slide, heading, support line, emphasis, supplied CTA and revision. Never
+reselect a family for mood, composition, text fit or reference appearance. Genuine
+weights within the locked package may vary. Missing weights/assets require a
+disclosed constraint, never silent substitution. Only an explicit user request
+can replace the lock; then update and recheck the whole sequence consistently.
+When a sequence continues across turns, retain its profile rather than choosing
+again. Include the full family/source lock in every independent production prompt.
+The user's explicitly named font always wins over a stored profile or bundled
+default, regardless of family. If no font has been named or previously approved,
+ask one concise font question before final typography; continue independent scene
+planning meanwhile. Never assume Yekan Bakh, Peyda or Vazirmatn is compulsory.
+
 For Story design, read [references/art-direction.md](references/art-direction.md)
 before choosing composition. This is the primary design workflow. Interpret the
 whole sequence internally; do not create or show a side-by-side preview, contact

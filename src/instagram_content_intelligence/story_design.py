@@ -26,6 +26,8 @@ def validate_design(plan: dict) -> dict:
     if not isinstance(profile, dict):
         raise ValueError("profile must be an object")
     text_field(profile, "font_family")
+    if "font_asset" in profile:
+        text_field(profile, "font_asset")
     weights = profile.get("weights")
     if not isinstance(weights, list) or not weights or any(not isinstance(w, str) or not w.strip() for w in weights):
         raise ValueError("weights must contain requested named weights")
@@ -39,6 +41,9 @@ def validate_design(plan: dict) -> dict:
     for index, slide in enumerate(slides):
         if not isinstance(slide, dict):
             raise ValueError("slide must be an object")
+        for key in ("font_family", "font_asset"):
+            if key in slide and slide[key] != profile.get(key):
+                raise ValueError("sequence font lock: slide override rejected")
         original = text_field(slide, "copy")
         text_field(slide, "composition")
         text_field(slide, "background")
@@ -50,6 +55,9 @@ def validate_design(plan: dict) -> dict:
         for block in blocks:
             if not isinstance(block, dict):
                 raise ValueError("text block must be an object")
+            for key in ("font_family", "font_asset"):
+                if key in block and block[key] != profile.get(key):
+                    raise ValueError("sequence font lock: text override rejected")
             copy.append(text_field(block, "text"))
             box = _box(block.get("box"), "text box")
             if any(_overlap(box, other) for other in boxes + reserved):
@@ -86,7 +94,10 @@ def compile_prompts(plan: dict) -> list[str]:
             "[COMPOSITION]\n" + slide["composition"],
             "[BACKGROUND]\n" + slide["background"],
             "[FONT]\nUse the exact " + profile["font_family"] + " asset. Verify real weights before rendering. No silent substitution or synthetic weight. If unavailable, report the missing asset; do not claim exact rendering.",
+            "[SEQUENCE FONT LOCK]\nThe same Persian family applies to every slide, heading, body, emphasis and CTA in this sequence, including revisions. Never change family for mood, fit, a reference style or an unavailable weight. Use only declared genuine weights: " + ", ".join(profile["weights"]) + ". A user-authorized font replacement requires updating the entire sequence, not one slide.",
         ]
+        if profile.get("font_asset"):
+            sections.append("Required sequence font source: " + profile["font_asset"] + ". This is a requested source, not proof it has been loaded. Do not mix versions or unrelated font files.")
         if slide.get("subject"):
             sections.append("[SUBJECT AND REFERENCE]\n" + text_field(slide, "subject"))
         if slide.get("reserved_areas"):

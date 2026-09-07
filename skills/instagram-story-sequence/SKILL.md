@@ -13,6 +13,25 @@ Resolve `PLUGIN_ROOT`: Claude Code provides `${CLAUDE_PLUGIN_ROOT}`; otherwise r
 
 ## Design workflow
 
+Read [references/scenario-to-production.md](references/scenario-to-production.md)
+for new scenarios, critique and production handoff. Read
+[references/sources-and-ranking.md](references/sources-and-ranking.md) when advice
+depends on ranking, current platform features, metrics or an algorithm claim.
+Do not browse just to decorate an already approved design with citations.
+
+For new writing, choose the narrative structure from the actual audience job:
+teaching needs an actionable demonstration, a personal narrative needs a concrete
+event and change, comparison needs matched alternatives, and a sales sequence needs
+a real offer and supported evidence. Compare openings internally and choose one
+truthful promise. Each frame must add information or advance the narrative; remove
+filler, repeated hooks and empty suspense. Do not force seven frames or a fixed
+role order. Re-read the final copy to verify that the ending actually fulfills the
+opening promise. These are editorial checks, not evidence of predicted performance.
+
+When handing off to design, pass the same sequence-wide Persian font profile to
+every frame. Variations in color, composition and genuine weight must never change
+the font family or asset package. Preserve that lock across later revisions.
+
 1. Declare one audience job and one sequence objective.
 2. Write a truthful opening promise and the payoff that closes it.
 3. Assign each frame a narrative role: interrupt, recognition, tension, value, proof, interaction, resolution, or CTA.

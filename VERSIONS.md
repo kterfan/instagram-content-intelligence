@@ -1,6 +1,10 @@
 # Versions
 
-## Unreleased — Story art direction, 2026-09-07
+## 0.4.0 — Story art direction, 2026-09-07
+
+- Locked the user's chosen Persian font across all slides and revisions; reject conflicting structured family/asset overrides and repeat the lock in each prompt.
+- Added twelve scenario patterns, critique-to-production guidance and primary-source research routing with explicit ranking uncertainty and access-status notes.
+- Passed 85 local tests and both revised Skill validators. Human aesthetic/performance evaluation remains pending.
 
 - Expanded the visual Skill with semantic composition selection, account-specific font profiles, Persian typography, photography and local revision guidance.
 - Sequence design stays internal: no contact sheet or side-by-side preview by default.

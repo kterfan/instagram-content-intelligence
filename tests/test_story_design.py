@@ -43,6 +43,25 @@ class StoryDesignTests(unittest.TestCase):
         self.plan["slides"][0]["text_blocks"][0]["text"] = self.plan["slides"][0]["text_blocks"][0]["text"].replace(" ", "\n")
         self.assertEqual(validate_design(self.plan)["status"], "structurally_valid")
 
+    def test_sequence_rejects_family_and_asset_drift(self):
+        for target in ("slide", "block"):
+            for key, value in (("font_family", "Different"), ("font_asset", "different.woff2")):
+                plan = copy.deepcopy(self.plan)
+                plan["slides"].append(copy.deepcopy(plan["slides"][0]))
+                node = plan["slides"][1]
+                if target == "block":
+                    node = node["text_blocks"][0]
+                node[key] = value
+                with self.assertRaisesRegex(ValueError, "sequence font lock"):
+                    validate_design(plan)
+
+    def test_every_prompt_carries_same_lock(self):
+        self.plan["profile"]["font_asset"] = "private/font-package-v1"
+        self.plan["slides"].append(copy.deepcopy(self.plan["slides"][0]))
+        for prompt in compile_prompts(self.plan):
+            self.assertIn("[SEQUENCE FONT LOCK]", prompt)
+            self.assertIn("private/font-package-v1", prompt)
+
     def test_resolution_and_profiles_are_independent(self):
         for family in ("Yekan Bakh", "Peyda"):
             self.plan["profile"]["font_family"] = family

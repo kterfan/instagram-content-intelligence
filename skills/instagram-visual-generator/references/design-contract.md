@@ -17,6 +17,12 @@ user response. Keep these intermediate files private.
 See `${PLUGIN_ROOT}/examples/story-design.json` for a complete synthetic example.
 
 Required profile: font_family and requested named weights. These fields declare
+the user's chosen family for the entire sequence. Optional font_asset declares
+the same asset/package source for every slide. A differing font_family or font_asset
+on a slide or text block is rejected. Every compiled prompt repeats the sequence
+lock; free-text directions and the downstream image still require inspection.
+These are structured constraints, not proof of font use in a generated bitmap.
+The profile fields declare
 requirements; they are not verification that font assets exist. Optional private
 profile fields can track asset path, palette, approved references and dislikes;
 the host must resolve them into the chosen composition and styling before compiling.
